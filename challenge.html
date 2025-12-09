@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>365-Day Challenge — Islamic._._dill</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{--bg:#0b0b0b; --card:#121212; --accent:#d4b86a; --muted:#cfcfcf}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#070707,#0b0b0b);color:#fff;font-family:Georgia,serif}
+    .wrap{max-width:760px;margin:0 auto;padding:20px 16px;padding-bottom:110px}
+    h1{font-size:26px;text-align:center;margin:0 0 18px}
+    h2{font-size:18px;margin:16px 0}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px;box-shadow:0 6px 14px rgba(0,0,0,.6)}
+    .big-text{font-size:18px;line-height:1.4}
+    .meta{color:var(--muted);font-size:13px;margin-top:8px}
+    .preview-card{margin-top:12px;cursor:pointer;border:1px solid rgba(255,255,255,0.03);transition:transform .12s ease;display:flex;flex-direction:column;justify-content:center}
+    .preview-card:active{transform:translateY(2px)}
+    .controls{margin-top:12px}
+    button{background:#fff;color:#000;border-radius:8px;border:0;padding:8px 12px;margin-right:8px;cursor:pointer}
+    .history-item{margin-top:10px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02)}
+    .small{font-size:13px;color:var(--muted)}
+    .nav{position:fixed;left:0;right:0;bottom:0;height:68px;background:#080808;border-top:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-around;padding:0 10px}
+    .nav a{color:#d6cdbf;text-decoration:none;font-size:12px;text-align:center}
+    .note{color:var(--muted);font-size:13px;margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>365-Day Challenge</h1>
+
+    <section>
+      <h2>Today's Challenge</h2>
+      <div id="todayCard" class="card">
+        <div id="todayText" class="big-text">Loading...</div>
+        <div id="todayNote" class="meta small"></div>
+
+        <div class="controls" style="margin-top:12px">
+          <button id="markDoneBtn">Mark Done</button>
+          <span id="doneMsg" style="margin-left:10px;color:var(--accent);font-weight:700"></span>
+        </div>
+      </div>
+      <div class="note">Preview: click the box below to cycle through up to 5 quick previews (Preview 1 → Preview 5).</div>
+    </section>
+
+    <section>
+      <h2>Preview</h2>
+      <div id="previewCard" class="card preview-card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div id="previewLabel" class="small">Preview 1 of 5</div>
+            <div id="previewText" class="big-text" style="margin-top:8px">Click to show Preview 1</div>
+          </div>
+          <div id="previewHint" class="meta small" style="text-align:right">Click to show next preview</div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:18px">
+      <h2>History (Completed)</h2>
+      <div id="historyList" class="small">No completed challenges yet.</div>
+    </section>
+  </div>
+
+  <nav class="nav">
+    <a href="index.html"><span class="icon">🏠</span><br>Home</a>
+    <a href="hadiths.html"><span class="icon">📖</span><br>Hadith</a>
+    <a href="verses.html"><span class="icon">🕋</span><br>Verse</a>
+    <a href="challenge.html"><span class="icon">🎯</span><br>Challenge</a>
+    <a href="about.html"><span class="icon">ℹ️</span><br>About</a>
+  </nav>
+
+  <script>
+    /*************** Data: short challenge list (expand later) ****************/
+    const CHALLENGES = [
+      "Send a kind message to a family member.",
+      "Avoid backbiting for the whole day.",
+      "Give sincere praise to someone today.",
+      "Read one page of Qur'an tonight with reflection.",
+      "Perform two extra voluntary rak'ahs today.",
+      "Offer water or food to one neighbor or stranger.",
+      "Help someone with a small task without being asked.",
+      "Make sincere dua for someone who needs it.",
+      "Give a small sadaqah today, even a little.",
+      "Make wudu and pray on time intentionally.",
+      "Spend 10 minutes learning a short hadith and apply it.",
+      "Call your parents simply to ask about their well-being.",
+      "Smile and compliment at least three people.",
+      "Plan and complete one household task with patience.",
+      "Recite salawat 20 times during the day.",
+      "Avoid wasting time on social media for 2 hours.",
+      "Give someone food or drink when they need it.",
+      "Read and reflect on one verse of the Qur'an.",
+      "Make up for a missed good deed; forgive someone.",
+      "Fast a recommended fast (if able) or do extra dhikr.",
+      "Help clean a shared space or pick up litter.",
+      "Teach a short reminder to someone (share knowledge).",
+      "Donate or give for someone in need, however small.",
+      "Visit or call someone who may be lonely.",
+      "Spend five minutes in quiet reflection and gratitude."
+    ];
+
+    /* ---------- utilities ---------- */
+    function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+
+    function pickOnce(key, list) {
+      const day = todayKey();
+      const dayKey = key + "_day";
+      if(localStorage.getItem(dayKey) === day){
+        const existing = localStorage.getItem(key);
+        if(existing) try { return JSON.parse(existing); } catch(e){}
+      }
+      const pick = list[Math.floor(Math.random()*list.length)];
+      localStorage.setItem(key, JSON.stringify(pick));
+      localStorage.setItem(dayKey, day);
+      return pick;
+    }
+
+    /* ---------- Daily challenge ---------- */
+    const TODAY_KEY = 'daily_challenge';
+    const PREVIEW_POS_KEY = 'preview_pos_' + todayKey(); // per-day preview position
+    const PREVIEW_SHOWN_KEY = 'preview_shown_' + todayKey(); // array of shown preview indices (to avoid repeat)
+    const CH_HISTORY_KEY = 'challenge_history';
+
+    function renderToday(){
+      const today = pickOnce(TODAY_KEY, CHALLENGES);
+      document.getElementById('todayText').textContent = today;
+      // If already marked done today, disable mark button and show mashallah
+      const doneForDay = localStorage.getItem('done_' + todayKey());
+      const markBtn = document.getElementById('markDoneBtn');
+      const doneMsg = document.getElementById('doneMsg');
+      if(doneForDay){
+        markBtn.disabled = true;
+        markBtn.style.opacity = 0.6;
+        doneMsg.textContent = "Mashallah — recorded. You will be rewarded in the Akhira.";
+      } else {
+        markBtn.disabled = false;
+        markBtn.style.opacity = 1;
+        doneMsg.textContent = "";
+      }
+    }
+
+    /* ---------- Preview handling: one box clicked cycles through Previews 1..5 ---------- */
+    function getPreviewPos(){return Number(localStorage.getItem(PREVIEW_POS_KEY) || '1');}
+    function setPreviewPos(n){localStorage.setItem(PREVIEW_POS_KEY, String(n));}
+
+    function getShownIndices(){try{return JSON.parse(localStorage.getItem(PREVIEW_SHOWN_KEY) || '[]');}catch(e){return []}}
+    function setShownIndices(arr){localStorage.setItem(PREVIEW_SHOWN_KEY, JSON.stringify(arr))}
+
+    function getRandomPreviewAvoidShown(){
+      const shown = getShownIndices();
+      // build list of indices not yet shown
+      const available = [];
+      for(let i=0;i<CHALLENGES.length;i++) if(!shown.includes(i)) available.push(i);
+      if(available.length === 0){
+        // all were shown; reset shown and allow again
+        setShownIndices([]);
+        return Math.floor(Math.random()*CHALLENGES.length);
+      }
+      const idx = available[Math.floor(Math.random()*available.length)];
+      shown.push(idx);
+      setShownIndices(shown);
+      return idx;
+    }
+
+    function renderPreview(){
+      let pos = getPreviewPos();
+      if(pos > 5){
+        // no more previews
+        document.getElementById('previewLabel').textContent = 'Previews finished';
+        document.getElementById('previewText').textContent = 'You have viewed all 5 previews for today.';
+        document.getElementById('previewHint').textContent = '';
+        document.getElementById('previewCard').style.opacity = 0.8;
+        document.getElementById('previewCard').style.cursor = 'default';
+        return;
+      }
+      document.getElementById('previewLabel').textContent = `Preview ${pos} of 5`;
+      // if we already have a stored preview for this pos, use it; else pick random and store it per pos
+      const storedForDay = JSON.parse(localStorage.getItem('previews_' + todayKey() ) || '{}');
+      if(storedForDay['p' + pos]){
+        document.getElementById('previewText').textContent = storedForDay['p' + pos];
+      } else {
+        const idx = getRandomPreviewAvoidShown();
+        const text = CHALLENGES[idx];
+        storedForDay['p' + pos] = text;
+        localStorage.setItem('previews_' + todayKey(), JSON.stringify(storedForDay));
+        document.getElementById('previewText').textContent = text;
+      }
+      document.getElementById('previewHint').textContent = 'Click preview to show next (max 5)';
+    }
+
+    /* ---------- Mark Done ---------- */
+    function markDoneToday(){
+      const todayText = JSON.parse(localStorage.getItem(TODAY_KEY));
+      if(!todayText) return;
+      const dayKey = 'done_' + todayKey();
+      if(localStorage.getItem(dayKey)) return; // already done
+      localStorage.setItem(dayKey, '1');
+      // push to history
+      const hist = JSON.parse(localStorage.getItem(CH_HISTORY_KEY) || '[]');
+      hist.unshift({text: todayText, date: new Date().toLocaleString()});
+      localStorage.setItem(CH_HISTORY_KEY, JSON.stringify(hist));
+      renderHistory();
+      renderToday();
+      // show mashallah message briefly (doneMsg already set by renderToday)
+      const doneMsg = document.getElementById('doneMsg');
+      doneMsg.textContent = "Mashallah — recorded. You will be rewarded in the Akhira.";
+    }
+
+    /* ---------- History ---------- */
+    function renderHistory(){
+      const list = JSON.parse(localStorage.getItem(CH_HISTORY_KEY) || '[]');
+      const container = document.getElementById('historyList');
+      if(!list.length){
+        container.textContent = 'No completed challenges yet.';
+        return;
+      }
+      container.innerHTML = '';
+      list.forEach(item=>{
+        const d = document.createElement('div');
+        d.className = 'history-item';
+        d.innerHTML = `<div style="font-weight:600">${item.text}</div><div class="small" style="margin-top:6px">${item.date}</div>`;
+        container.appendChild(d);
+      });
+    }
+
+    /* ---------- Init ---------- */
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // ensure daily pick exists
+      pickOnce(TODAY_KEY, CHALLENGES);
+      // reset preview position for this day only if missing
+      if(!localStorage.getItem(PREVIEW_POS_KEY)) setPreviewPos(1);
+      // clear shown indices if not present
+      if(!localStorage.getItem(PREVIEW_SHOWN_KEY)) setShownIndices([]);
+
+      renderToday();
+      renderPreview();
+      renderHistory();
+
+      // preview click behavior: increment pos and render next preview
+      document.getElementById('previewCard').addEventListener('click', ()=>{
+        let pos = getPreviewPos();
+        if(pos > 5) return; // disabled
+        // if this preview already exists (we just showed it), advance pos so next click shows next
+        if(pos < 5){
+          // move to next preview position
+          setPreviewPos(pos + 1);
+          renderPreview();
+        } else {
+          // pos === 5 -> after clicking we mark finished
+          setPreviewPos(6);
+          renderPreview();
+        }
+      });
+
+      document.getElementById('markDoneBtn').addEventListener('click', ()=>{
+        markDoneToday();
+      });
+    });
+  </script>
+</body>
+  </html>
