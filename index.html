@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Islamic._._dill — Home</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* compact styles to ensure mobile looks like Instagram-like bottom nav and tidy cards */
+    :root{
+      --bg:#0b0b0b; --card:#121212; --accent:#d4b86a; --muted:#cfcfcf;
+      --radius:12px; --pad:14px;
+    }
+    html,body{height:100%;margin:0;font-family:Georgia,serif;background:linear-gradient(180deg,#070707 0%, #0b0b0b 100%);color:#fff}
+    .wrap{max-width:760px;margin:0 auto;padding:18px 16px;padding-bottom:110px}
+    .title{text-align:center;font-size:28px;padding:8px 0;font-weight:700}
+    h2{font-size:18px;margin:18px 0 10px;color:#fff}
+    .row{display:flex;gap:12px;align-items:center}
+    .thumb{width:32%;border-radius:12px;overflow:hidden;background:#0f0f0f;box-shadow:0 6px 18px rgba(0,0,0,.6);min-height:120px;display:block;text-decoration:none}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:12px;box-shadow:0 6px 12px rgba(0,0,0,.6);color:#fff}
+    .meta.small{color:var(--muted);font-size:13px;margin-top:8px}
+    .nav{position:fixed;left:0;right:0;bottom:0;height:68px;background:#080808;border-top:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-around;padding:0 10px;backdrop-filter: blur(6px)}
+    .nav a{color:#d6cdbf;text-decoration:none;font-size:12px;text-align:center}
+    .nav a .icon{display:block;font-size:18px}
+    .arabic{font-family: 'Times New Roman', serif; text-align:center; font-size:20px; margin-top:18px}
+    .trans{opacity:.9;color:var(--muted);text-align:center}
+    .small-note{color:var(--muted);font-size:13px;margin-top:8px;text-align:center}
+    button{background:#fff;color:#000;border-radius:6px;border:0;padding:6px 10px;margin-right:8px;cursor:pointer}
+    /* floral faded design at top: subtle svg gradient */
+    header{background-image: radial-gradient(circle at 20% 10%, rgba(212,184,106,0.06), transparent 12%), radial-gradient(circle at 80% 10%, rgba(212,184,106,0.03), transparent 10%); padding-bottom:6px}
+    @media (max-width:420px){ .thumb{width:30%} .wrap{padding:12px} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">Islamic._._dill</div>
+    </header>
+
+    <section>
+      <h2>Instagram Posts</h2>
+      <!-- Replace these hrefs if you want different IG links; thumbnails are local files you will upload -->
+      <div class="row">
+        <a class="thumb" href="https://www.instagram.com/p/DR_9PHzk0Os/" target="_blank" rel="noopener noreferrer">
+          <img src="images/post1.jpg" alt="Post 1 thumbnail">
+        </a>
+        <a class="thumb" href="https://www.instagram.com/reel/DSACgkgE08o/" target="_blank" rel="noopener noreferrer">
+          <img src="images/reel1.jpg" alt="Reel 1 thumbnail">
+        </a>
+        <a class="thumb" href="https://www.instagram.com/reel/DSADchnE6hv/" target="_blank" rel="noopener noreferrer">
+          <img src="images/reel2.jpg" alt="Reel 2 thumbnail">
+        </a>
+      </div>
+      <div class="small-note">Tap a thumbnail to open the Instagram post.</div>
+    </section>
+
+    <section>
+      <h2>Hadith of the Day</h2>
+      <div class="card">
+        <div id="hadith-of-day">Loading...</div>
+        <div id="hadith-ref" class="meta small"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Verse of the Day</h2>
+      <div class="card">
+        <div id="verse-of-day">Loading...</div>
+        <div id="verse-ref" class="meta small"></div>
+      </div>
+    </section>
+
+    <div class="arabic">وَوَجَدَكَ ضَالًّا فَهَدَى</div>
+    <div class="trans">“And He found you lost and guided you.” — Qur'an 93:7</div>
+    <div style="height:18px"></div>
+  </div>
+
+  <nav class="nav">
+    <a href="index.html"><span class="icon">🏠</span><span>Home</span></a>
+    <a href="hadiths.html"><span class="icon">📖</span><span>Hadith</span></a>
+    <a href="verses.html"><span class="icon">🕋</span><span>Verse</span></a>
+    <a href="challenge.html"><span class="icon">🎯</span><span>Challenge</span></a>
+    <a href="about.html"><span class="icon">ℹ️</span><span>About</span></a>
+  </nav>
+
+  <script>
+    /* ---------- Data (short lists here, expand in hadiths.html / verses.html) ---------- */
+    const HADITHS = [
+      {text:"Actions are judged by intentions.", ref:"Sahih al-Bukhari (1)"},
+      {text:"A smile is charity.", ref:"Tirmidhi"},
+      {text:"None of you truly believes until he wishes for his brother what he wishes for himself.", ref:"Bukhari & Muslim"},
+      {text:"Cleanliness is half of faith.", ref:"Sahih Muslim"},
+      {text:"Speak good or remain silent.", ref:"Bukhari & Muslim"},
+      {text:"Whoever believes in Allah and the Last Day, should speak good or remain silent.", ref:"Bukhari & Muslim"},
+      {text:"The strong believer is better than the weak believer.", ref:"Sahih Muslim"}
+      // add more in hadiths.html later (you asked for 40)
+    ];
+    const VERSES = [
+      {arabic:"فَاذْكُرُونِي أَذْكُرْكُمْ", trans:"So remember Me; I will remember you.", ref:"2:152"},
+      {arabic:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", trans:"Indeed, with hardship comes ease.", ref:"94:6"},
+      {arabic:"وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", trans:"And whoever relies upon Allah — then He is sufficient for him.", ref:"65:3"},
+      {arabic:"رَبِّ زِدْنِي عِلْمًا", trans:"My Lord, increase me in knowledge.", ref:"20:114"}
+    ];
+
+    /* ---------- helper to pick and persist a daily item ---------- */
+    function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+    function pickOnce(key, list){
+      const day = todayKey();
+      const dayKey = key + "_day";
+      // if same day, return existing
+      if(localStorage.getItem(dayKey) === day){
+        const existing = localStorage.getItem(key);
+        if(existing) try{return JSON.parse(existing);}catch(e){}
+      }
+      const pick = list[Math.floor(Math.random()*list.length)];
+      localStorage.setItem(key, JSON.stringify(pick));
+      localStorage.setItem(dayKey, day);
+      return pick;
+    }
+
+    /* ---------- on DOM ready ---------- */
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const h = pickOnce('hadith_today', HADITHS);
+      document.getElementById('hadith-of-day').textContent = `"${h.text}"`;
+      document.getElementById('hadith-ref').textContent = h.ref || '';
+
+      const v = pickOnce('verse_today', VERSES);
+      document.getElementById('verse-of-day').textContent = (v.arabic ? v.arabic + ' ' : '') + (v.trans || '');
+      document.getElementById('verse-ref').textContent = v.ref || '';
+    });
+  </script>
+</body>
+  </html>
