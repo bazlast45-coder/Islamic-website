@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Qur'an Verses — Islamic._._dill</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="header-floral" aria-hidden="true"></div>
+  <header class="header">
+    <div class="site-title">Qur'an Verses</div>
+    <div class="site-sub small-muted">Reflect & Remember</div>
+  </header>
+
+  <div class="container">
+    <div id="verse-list" class="card">
+      <!-- verses appended by script.js -->
+      <div class="small-muted">Loading verses…</div>
+    </div>
+  </div>
+
+  <div class="loader-overlay" id="loaderOverlay"><div class="loader-circle"></div></div>
+
+  <nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
+    <button data-target="index.html" onclick="navigateWithBriefAnim('index.html')"><i class="fas fa-home"></i> Home</button>
+    <button data-target="verses.html" onclick="navigateWithBriefAnim('verses.html')"><i class="fas fa-scroll"></i> Verses</button>
+    <button data-target="hadiths.html" onclick="navigateWithBriefAnim('hadiths.html')"><i class="fas fa-book"></i> Hadiths</button>
+    <button data-target="challenge.html" onclick="navigateWithBriefAnim('challenge.html')"><i class="fas fa-star"></i> Challenge</button>
+    <button data-target="about.html" onclick="navigateWithBriefAnim('about.html')"><i class="fas fa-info-circle"></i> About</button>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
