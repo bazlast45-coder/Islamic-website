@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Islamic._._dill — Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- FLORAL DECOR (INLINE SVG SO IT ALWAYS SHOWS ON MOBILE) -->
+  <svg id="floral-decor" viewBox="0 0 1400 260" preserveAspectRatio="xMidYMin slice">
+    <defs>
+      <linearGradient id="fg" x1="0" x2="1">
+        <stop offset="0" stop-color="#c79a3b" stop-opacity="0.32"/>
+        <stop offset="1" stop-color="#c79a3b" stop-opacity="0.15"/>
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#fg)" stroke-width="3.4">
+      <path d="M0 180 C220 20, 440 60, 720 110 C1000 160, 1180 60, 1400 180"/>
+      <path d="M40 165 C240 40, 460 90, 740 130 C1020 165, 1200 80, 1380 165" stroke-opacity="0.65"/>
+    </g>
+  </svg>
+
+  <div class="app-shell">
+
+    <header>
+      <div class="title">Islamic._._dill</div>
+    </header>
+
+    <main class="container">
+
+      <!-- INSTAGRAM POSTS -->
+      <section id="instagram-posts">
+        <h2>Instagram Posts</h2>
+        <div class="posts">
+          <a href="https://www.instagram.com/p/DR_9PHzk0Os/" target="_blank">
+            <img src="post1.jpg" alt="Post 1">
+          </a>
+
+          <a href="https://www.instagram.com/reel/DSACgkgE08o/" target="_blank">
+            <img src="post2.jpg" alt="Reel 1">
+          </a>
+
+          <a href="https://www.instagram.com/reel/DSADchnE6hv/" target="_blank">
+            <img src="post3.jpg" alt="Reel 2">
+          </a>
+        </div>
+      </section>
+
+      <!-- HADITH OF THE DAY -->
+      <section id="daily-hadith">
+        <h2>Hadith of the Day</h2>
+        <div class="card">
+          <div id="hadith-display" class="trans">Loading…</div>
+          <div id="hadith-ref" class="meta small"></div>
+        </div>
+      </section>
+
+      <!-- VERSE OF THE DAY -->
+      <section id="daily-verse">
+        <h2>Verse of the Day</h2>
+        <div class="card">
+          <div id="verse-display" class="trans">Loading…</div>
+          <div id="verse-ref" class="meta small"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- INSTAGRAM-STYLE NAV -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="active"><span class="icon">🏠</span><span>Home</span></a>
+      <a href="hadiths.html"><span class="icon">📖</span><span>Hadith</span></a>
+      <a href="verses.html"><span class="icon">🕋</span><span>Verse</span></a>
+      <a href="challenge.html"><span class="icon">🎯</span><span>Challenge</span></a>
+      <a href="about.html"><span class="icon">ℹ️</span><span>About</span></a>
+    </nav>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+        </html>
