@@ -1,9 +1,9 @@
-/* script.js - daily hadith/verse, lists, challenge, modal, visible floral + about Arabic quote */
+/* script.js - daily hadith/verse, lists, challenge, modal, quotes, refs */
 
 /* ---------- DATA ---------- */
 const HADITHS = [
-  {text:"Actions are judged by intentions.", ref:"Sahih al-Bukhari 1"},
-  {text:"The strong believer is better than the weak believer.", ref:"Muslim"},
+  {text:"Actions are judged by intentions.", ref:"Sahih al-Bukhari (1)"},
+  {text:"The strong believer is better than the weak believer.", ref:"Sahih Muslim"},
   {text:"Cleanliness is half of faith.", ref:"Sahih Muslim"},
   {text:"A smile is charity.", ref:"Tirmidhi"},
   {text:"None of you truly believes until he wishes for his brother what he wishes for himself.", ref:"Bukhari & Muslim"},
@@ -38,7 +38,7 @@ const HADITHS = [
   {text:"Good deeds after death: ongoing charity, beneficial knowledge, pious child.", ref:"Muslim"},
   {text:"Do not be angry.", ref:"Bukhari"},
   {text:"Spend on your family and be moderate.", ref:"Bukhari"},
-  {text:"Allah forgives those who sincerely seek forgiveness.", ref:"Quranic emphasis"},
+  {text:"Allah forgives those who sincerely seek forgiveness.", ref:"Quran reference"},
   {text:"Maintain ties of kinship.", ref:"Bukhari & Muslim"}
 ];
 
@@ -49,20 +49,10 @@ const VERSES = [
   {arabic:"وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", trans:"And whoever relies upon Allah — then He is sufficient for him.", ref:"65:3"},
   {arabic:"لَا تُكَلَّفُ نَفْسٌ إِلَّا وُسْعَهَا", trans:"No soul is burdened beyond its capacity.", ref:"2:286"},
   {arabic:"إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ", trans:"The believers are but brothers.", ref:"49:10"},
-  {arabic:"قُلْ هُوَ اللَّهُ أَحَدٌ", trans:"Say: He is Allah, One.", ref:"112:1"},
   {arabic:"ادْعُونِي أَسْتَجِبْ لَكُمْ", trans:"Call upon Me; I will respond to you.", ref:"40:60"},
-  {arabic:"إِنَّ اللَّهَ لا يُغَيِّرُ مَا بِقَوْمٍ", trans:"Allah will not change condition of a people until they change themselves.", ref:"13:11"},
-  {arabic:"فَاسْتَبِقُوا الْخَيْرَاتِ", trans:"So race to goodness.", ref:"2:148"},
-  {arabic:"إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ", trans:"Indeed, Allah loves the doers of good.", ref:"2:195"},
-  {arabic:"وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ", trans:"Seek help through patience and prayer.", ref:"2:45"},
   {arabic:"لَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ", trans:"Do not despair of the mercy of Allah.", ref:"39:53"},
-  {arabic:"إِنَّ اللَّهَ مَعَ الْمُتَّقِينَ", trans:"Indeed, Allah is with the righteous.", ref:"16:128"},
-  {arabic:"وَعَسَى أَنْ تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَّكُمْ", trans:"Perhaps you hate a thing and it is good for you.", ref:"2:216"},
-  {arabic:"إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ", trans:"Actions are (judged) by intentions.", ref:"(principle)"},
-  {arabic:"وَاعْتَصِمُوا بِحَبْلِ اللَّهِ", trans:"Hold fast to the rope of Allah.", ref:"3:103"},
-  {arabic:"يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ", trans:"O you who have believed, fear Allah.", ref:"2:282"},
-  {arabic:"وَاعْبُدْ رَبَّكَ حَتَّى يَأْتِيَكَ الْيَقِينُ", trans:"Worship your Lord until certainty (death).", ref:"15:99"},
-  {arabic:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", trans:"Indeed, with hardship comes ease.", ref:"94:5-6"}
+  {arabic:"فَاسْتَبِقُوا الْخَيْرَاتِ", trans:"So race to goodness.", ref:"2:148"},
+  {arabic:"إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ", trans:"Indeed, Allah loves the doers of good.", ref:"2:195"}
 ];
 
 const CHALLENGES = [
@@ -106,24 +96,19 @@ function ensureDaily(){
 }
 function showHadith(h){
   const home = document.getElementById("hadith-display");
-  const page = document.getElementById("hadith-display-page");
   const refEl = document.getElementById("hadith-ref");
-  const text = `"${h.text}" — ${h.ref}`;
-  if(home) home.textContent = text;
-  if(page) page.textContent = text;
-  if(refEl) refEl.textContent = h.ref || "";
+  if(home) home.textContent = `"${h.text}"`;
+  if(refEl) refEl.textContent = `Reference: ${h.ref}`;
 }
 function showVerse(v){
   const home = document.getElementById("verse-display");
-  const page = document.getElementById("verse-display-page");
   const refEl = document.getElementById("verse-ref");
-  const display = v.arabic && v.arabic.trim() ? `${v.arabic}\n\n${v.trans}` : `${v.trans} — ${v.ref}`;
+  const display = v.arabic && v.arabic.trim() ? `${v.arabic}\n\n${v.trans}` : `${v.trans}`;
   if(home) home.textContent = display;
-  if(page) page.textContent = display;
-  if(refEl) refEl.textContent = v.ref || "";
+  if(refEl) refEl.textContent = `${v.ref}`;
 }
 
-/* ---------- lists & load more ---------- */
+/* ---------- lists & load more (for hadiths/verses pages) ---------- */
 function populateLists(){
   const hadList = document.getElementById("hadith-list");
   const verList = document.getElementById("verse-list");
@@ -132,7 +117,6 @@ function populateLists(){
     HADITHS.forEach((h, idx) => {
       const el = document.createElement("div"); el.className="list-card";
       el.innerHTML = `<div class="trans">${h.text}</div><div class="meta small">${h.ref}</div><div style="margin-top:8px"><button class="btn ghost" onclick='openModal(${idx},"hadith")'>View</button></div>`;
-      if(idx >= 8) el.style.display = "none";
       hadList.appendChild(el);
     });
   }
@@ -142,14 +126,9 @@ function populateLists(){
       const display = v.arabic && v.arabic.trim() ? `${v.arabic} — ${v.trans}` : `${v.trans} — ${v.ref}`;
       const el = document.createElement("div"); el.className="list-card";
       el.innerHTML = `<div class="trans">${display}</div><div class="meta small">${v.ref}</div><div style="margin-top:8px"><button class="btn ghost" onclick='openModal(${idx},"verse")'>View</button></div>`;
-      if(idx >= 8) el.style.display = "none";
       verList.appendChild(el);
     });
   }
-  const lmHad = document.getElementById("load-more-hadiths");
-  if(lmHad) lmHad.onclick = function(){ document.querySelectorAll("#hadith-list .list-card").forEach(el=>el.style.display="block"); lmHad.style.display="none"; }
-  const lmVer = document.getElementById("load-more-verses");
-  if(lmVer) lmVer.onclick = function(){ document.querySelectorAll("#verse-list .list-card").forEach(el=>el.style.display="block"); lmVer.style.display="none"; }
 }
 
 /* ---------- modal ---------- */
@@ -159,7 +138,7 @@ function openModal(idx,type){
   let html="";
   if(type==="hadith"){
     const h = HADITHS[idx];
-    html = `<div class="trans">${h.text}</div><div class="meta small">${h.ref}</div>`;
+    html = `<div class="trans">${h.text}</div><div class="meta small">Reference: ${h.ref}</div>`;
   } else {
     const v = VERSES[idx];
     html = `<div class="arabic">${v.arabic || ''}</div><div class="trans">${v.trans} — ${v.ref}</div>`;
@@ -172,7 +151,7 @@ function closeModal(e){
   document.getElementById("modal-bg").style.display = "none";
 }
 
-/* ---------- challenge logic ---------- */
+/* ---------- challenge functions (unchanged) ---------- */
 function ensureChallenge(){
   const today = todayKey();
   if(localStorage.getItem("ch_day") === today){
@@ -203,7 +182,6 @@ function markDone(){
 }
 window.markDone = markDone;
 
-/* preview limit (5/day) */
 function getAnother(){
   const today = todayKey();
   let pc = lsGet("preview_count") || { day: today, count: 0 };
@@ -266,19 +244,15 @@ function showRotatingQuote(){
     let i = Number(localStorage.getItem('quote_idx') || 0);
     const el = document.getElementById(quoteBoxId);
     if(el){ el.textContent = "“" + QUOTES[i % QUOTES.length] + "”"; i += 1; localStorage.setItem('quote_idx', i); }
-  }, 8000);
+  }, 9000);
 }
 
 /* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", ()=>{
   ensureDaily(); populateLists(); ensureChallenge(); renderHistory(); renderPreviewCount(); showRotatingQuote();
 
-  // About: if there is an about-quote element we ensure it's visible (already included in about.html)
-  // Fallback images: in case you later upload real images, fallback will be transparent
+  // fallback for posts images if errors
   document.querySelectorAll(".posts img").forEach(img => img.onerror = ()=> {
     img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='640'><rect width='100%25' height='100%25' fill='%23333'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='%23fff'>Instagram</text></svg>";
   });
-
-  const mark = document.getElementById("mark-done"); if(mark) mark.addEventListener("click", markDone);
-  const skip = document.getElementById("skip-btn"); if(skip) skip.addEventListener("click", getAnother);
 });
