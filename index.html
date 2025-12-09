@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Islamic._._dill — Daily Reminders</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="header-floral" aria-hidden="true"></div>
+
+  <header class="header">
+    <div class="site-title">Islamic._._dill</div>
+    <div class="site-sub small-muted">Remembrance • Hadith • Good Deeds</div>
+  </header>
+
+  <div class="container">
+
+    <!-- Daily Hadith Card -->
+    <div class="card" id="hadith-card">
+      <div class="arabic" id="hadith-ar">—</div>
+      <div class="trans" id="hadith-trans">Loading daily hadith…</div>
+      <div class="meta" id="hadith-ref"></div>
+    </div>
+
+    <!-- Daily Verse Card -->
+    <div class="card" id="verse-card">
+      <div class="arabic" id="verse-ar">—</div>
+      <div class="trans" id="verse-trans">Loading daily verse…</div>
+      <div class="meta" id="verse-ref"></div>
+    </div>
+
+    <!-- Today's Challenge -->
+    <div class="card" id="chal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div><strong>Today's Challenge</strong></div>
+        <div class="small-muted">Daily • 1 per day</div>
+      </div>
+      <div class="trans" id="chal-text">—</div>
+      <div class="meta" id="chal-evidence"></div>
+      <div style="margin-top:12px;">
+        <button id="show-chal" class="btn" onclick="document.getElementById('chal-card').classList.toggle('expanded'); document.getElementById('mark-done')?.focus();"> <i class="fas fa-star"></i> Show/Hide</button>
+        <button id="mark-done" class="btn ghost" onclick="markDone()"> <i class="fas fa-check-circle"></i> Mark Done</button>
+        <div style="margin-top:8px;" class="small-muted">Completed today: <span id="done-status">No</span></div>
+      </div>
+    </div>
+
+    <!-- Instagram feed snapshot -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <strong>Instagram Highlights</strong>
+        <a href="https://instagram.com/Islamic._._dill" target="_blank" class="small-muted">@Islamic._._dill</a>
+      </div>
+      <div id="insta-grid" class="insta-grid" aria-live="polite">
+        <!-- images populated by script.js -->
+      </div>
+    </div>
+
+    <!-- quick links -->
+    <div style="margin-top:10px;text-align:center;" class="small-muted">Browse more: 
+      <button class="btn ghost" onclick="navigateWithBriefAnim('hadiths.html')">All Hadiths</button>
+      <button class="btn ghost" onclick="navigateWithBriefAnim('verses.html')">All Verses</button>
+      <button class="btn ghost" onclick="navigateWithBriefAnim('challenge.html')">All Challenges</button>
+    </div>
+
+  </div>
+
+  <!-- small loader overlay used for nav animation -->
+  <div class="loader-overlay" id="loaderOverlay"><div class="loader-circle"></div></div>
+
+  <!-- Bottom fixed nav like Instagram -->
+  <nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
+    <button data-target="index.html" onclick="navigateWithBriefAnim('index.html')"><i class="fas fa-home"></i> Home</button>
+    <button data-target="verses.html" onclick="navigateWithBriefAnim('verses.html')"><i class="fas fa-scroll"></i> Verses</button>
+    <button data-target="hadiths.html" onclick="navigateWithBriefAnim('hadiths.html')"><i class="fas fa-book"></i> Hadiths</button>
+    <button data-target="challenge.html" onclick="navigateWithBriefAnim('challenge.html')"><i class="fas fa-star"></i> Challenge</button>
+    <button data-target="about.html" onclick="navigateWithBriefAnim('about.html')"><i class="fas fa-info-circle"></i> About</button>
+  </nav>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
