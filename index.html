@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Islamic._._dill — Home</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{
+      --bg:#0f0f10; --card:#121212; --accent:#d4b86a; --muted:#bdbdbd;
+      --radius:14px; --gap:14px; --pad:14px;
+    }
+    html,body{height:100%;margin:0;font-family:Georgia,serif;background:linear-gradient(180deg,#070707 0%, #0b0b0b 100%);color:#fff}
+    .container{max-width:760px;margin:0 auto;padding:18px 16px;padding-bottom:110px}
+    header .title{font-family: 'Georgia', serif; text-align:center; font-size:28px; padding:12px 0;}
+    h2{font-size:20px;margin:24px 0 10px 0;color:#fff}
+    .gallery{display:flex;gap:12px;align-items:center}
+    .embed-box{width:30%;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#111 0,#0b0b0b 100%);box-shadow:0 6px 18px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;min-height:120px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:14px;box-shadow:0 6px 12px rgba(0,0,0,.6);color:#fff}
+    .meta.small{color:var(--muted);font-size:13px;margin-top:8px}
+    .bottom-nav{position:fixed;left:0;right:0;bottom:0;height:64px;background:#080808;border-top:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-around;padding:0 10px;backdrop-filter: blur(6px)}
+    .bottom-nav a{color:#d6cdbf;text-decoration:none;font-size:12px;text-align:center}
+    .bottom-nav a .icon{display:block;font-size:18px}
+    .arabic{font-family: 'Times New Roman', serif; text-align:center; font-size:20px; margin-bottom:6px}
+    .trans{opacity:.9;color:var(--muted);text-align:center}
+    .quote{margin-top:18px; text-align:center;color:var(--muted)}
+    .cta a{color:var(--accent); text-decoration:none}
+    .fallback{color:var(--muted);font-size:13px;text-align:center;padding:8px}
+    @media (max-width:420px){
+      .embed-box{width:30%}
+      .container{padding:14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="title">Islamic._._dill</div>
+    </header>
+
+    <section>
+      <h2>Instagram Posts</h2>
+
+      <!-- Instagram embed blockquotes load with the Instagram embed script below.
+           Replace the href values with your actual public post/reel URLs if you want different ones. -->
+
+      <div class="gallery">
+        <div class="embed-box card">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DR_9PHzk0Os/" data-instgrm-version="14" style="width:100%;max-width:320px;">
+            <a href="https://www.instagram.com/p/DR_9PHzk0Os/" target="_blank" rel="noopener noreferrer">Instagram post</a>
+          </blockquote>
+        </div>
+
+        <div class="embed-box card">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSACgkgE08o/" data-instgrm-version="14" style="width:100%;max-width:320px;">
+            <a href="https://www.instagram.com/reel/DSACgkgE08o/" target="_blank" rel="noopener noreferrer">Instagram reel</a>
+          </blockquote>
+        </div>
+
+        <div class="embed-box card">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSADchnE6hv/" data-instgrm-version="14" style="width:100%;max-width:320px;">
+            <a href="https://www.instagram.com/reel/DSADchnE6hv/" target="_blank" rel="noopener noreferrer">Instagram reel</a>
+          </blockquote>
+        </div>
+      </div>
+
+      <div id="ig-fallback" class="fallback" style="display:none;">
+        Instagram previews are blocked in this browser — <a href="https://www.instagram.com/islamic._._dill/" class="cta">open the Instagram profile</a>.
+      </div>
+    </section>
+
+    <section>
+      <h2>Hadith of the Day</h2>
+      <div class="card">
+        <div id="hadith-of-day">Loading...</div>
+        <div id="hadith-ref" class="meta small"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Verse of the Day</h2>
+      <div class="card">
+        <div id="verse-of-day">Loading...</div>
+        <div id="verse-ref" class="meta small"></div>
+      </div>
+    </section>
+
+    <div class="quote">
+      <div class="arabic">وَوَجَدَكَ ضَالًّا فَهَدَى</div>
+      <div class="trans">“And He found you lost and guided you.” — Quran (93:7)</div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html"><span class="icon">🏠</span><span>Home</span></a>
+    <a href="hadiths.html"><span class="icon">📖</span><span>Hadith</span></a>
+    <a href="verses.html"><span class="icon">🕋</span><span>Verse</span></a>
+    <a href="challenge.html"><span class="icon">🎯</span><span>Challenge</span></a>
+    <a href="about.html"><span class="icon">ℹ️</span><span>About</span></a>
+  </nav>
+
+  <!-- Instagram embed script (official). It will transform the blockquote into a post preview.
+       If the script is blocked or fails, we show a fallback link. -->
+  <script async defer src="https://www.instagram.com/embed.js"></script>
+
+<script>
+/* hadith & verse daily pick (persist once per day) */
+const HADITHS = [
+  {text:"Actions are judged by intentions.", ref:"Sahih al-Bukhari"},
+  {text:"A smile is charity.", ref:"Tirmidhi"},
+  {text:"None of you truly believes until he wishes for his brother what he wishes for himself.", ref:"Bukhari & Muslim"},
+  {text:"Cleanliness is half of faith.", ref:"Sahih Muslim"},
+  {text:"The strong believer is better than the weak believer.", ref:"Sahih Muslim"},
+  {text:"Speak good or remain silent.", ref:"Bukhari & Muslim"},
+  {text:"Whoever believes in Allah and the Last Day, should speak good or remain silent.", ref:"Bukhari & Muslim"}
+  // you can expand this list or move to hadiths.html for full list
+];
+const VERSES = [
+  {arabic:"فَاذْكُرُونِي أَذْكُرْكُمْ", trans:"So remember Me; I will remember you.", ref:"2:152"},
+  {arabic:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", trans:"Indeed, with hardship comes ease.", ref:"94:6"},
+  {arabic:"وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", trans:"And whoever relies upon Allah — then He is sufficient for him.", ref:"65:3"},
+  {arabic:"رَبِّ زِدْنِي عِلْمًا", trans:"My Lord, increase me in knowledge.", ref:"20:114"}
+];
+
+function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function pickOnce(key, list){
+  const day = todayKey();
+  const storageKey = key + "_day";
+  if(localStorage.getItem(storageKey) === day){
+    try{ return JSON.parse(localStorage.getItem(key)); }catch(e){}
+  }
+  const pick = list[Math.floor(Math.random()*list.length)];
+  localStorage.setItem(key, JSON.stringify(pick));
+  localStorage.setItem(storageKey, day);
+  return pick;
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  // hadith
+  const h = pickOnce('hadith_today', HADITHS);
+  document.getElementById('hadith-of-day').textContent = `"${h.text}"`;
+  document.getElementById('hadith-ref').textContent = h.ref || '';
+
+  // verse
+  const v = pickOnce('verse_today', VERSES);
+  document.getElementById('verse-of-day').textContent = (v.arabic ? v.arabic + ' ' : '') + (v.trans || '');
+  document.getElementById('verse-ref').textContent = v.ref || '';
+
+  // Instagram embed fallback: if embeds don't load within 3s, show fallback link
+  setTimeout(()=>{
+    // Instagram script defines window.instgrm when working
+    if(!window.instgrm || typeof window.instgrm === 'undefined' || !window.instgrm.Embeds){
+      document.getElementById('ig-fallback').style.display = 'block';
+      // hide embed boxes content (they'll stay as blockquote but may be empty)
+    } else {
+      // reparse so embed.js transforms blockquotes (some hosts auto-run; this ensures run)
+      try{ window.instgrm.Embeds.process(); }catch(e){}
+    }
+  }, 1200);
+});
+</script>
+</body>
+            </html>
