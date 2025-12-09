@@ -3,22 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Islamic Reminder</title>
+<title>Islamic Reminder - Home</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <header>
   <h1>Daily Islamic Reminder</h1>
   <nav>
-    <a href="#hadith">Hadith</a>
-    <a href="#verse">Verse</a>
-    <a href="#challenge">365 Challenge</a>
-    <a href="#about">About</a>
+    <a href="index.html"><i class="fas fa-home"></i>Home</a>
+    <a href="hadiths.html"><i class="fas fa-book"></i>Hadiths</a>
+    <a href="verses.html"><i class="fas fa-scroll"></i>Verses</a>
+    <a href="challenge.html"><i class="fas fa-star"></i>365 Challenge</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i>About</a>
   </nav>
 </header>
 
-<main>
+<!-- Loader -->
+<div id="loader">
+  <div class="spinner"></div>
+  <p id="loader-quote">“Verily, Allah is with the patient.” — Qur'an 2:153</p>
+</div>
+
+<div id="content" style="display:none;" class="main">
   <section id="hadith" class="block">
     <div class="arabic" id="hadith-ar">—</div>
     <div class="translation" id="hadith-trans">Loading Hadith…</div>
@@ -32,7 +40,7 @@
   </section>
 
   <section>
-    <button id="show-chal" class="btn">Show Today's 365 Challenge</button>
+    <button id="show-chal" class="btn">Show Today's Challenge</button>
   </section>
 
   <section id="challenge" class="block" style="display:none;">
@@ -41,17 +49,12 @@
     <button id="mark-done" class="btn secondary">Mark Done ✓</button>
     <div>Completed today: <span id="done-status">No</span></div>
   </section>
-
-  <section id="about" class="block">
-    <h2>About</h2>
-    <p>This site provides daily Hadith, Qur'an verses, and a 365-day Islamic challenge to increase knowledge and good deeds.</p>
-  </section>
-</main>
+</div>
 
 <footer>
-  Follow on Instagram: <a href="https://instagram.com/Islamic._._dill" target="_blank">@Islamic._._dill</a>
+Follow on Instagram: <a href="https://instagram.com/Islamic._._dill" target="_blank">@Islamic._._dill</a>
 </footer>
 
 <script src="script.js"></script>
 </body>
-                          </html>
+  </html>
