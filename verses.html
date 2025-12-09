@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verses — Islamic._._dill</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header><div class="title">Qur'an Verses</div></header>
+    <main class="container">
+      <section>
+        <h2>Verse of the Day</h2>
+        <div class="card">
+          <div id="verse-of-day">Loading...</div>
+          <div id="verse-of-day-ref" class="meta small"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>All Verses</h2>
+        <div id="verse-list" style="margin-top:10px;"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="icon">🏠</span><span>Home</span></a>
+      <a href="hadiths.html"><span class="icon">📖</span><span>Hadith</span></a>
+      <a href="verses.html" class="active"><span class="icon">🕋</span><span>Verse</span></a>
+      <a href="challenge.html"><span class="icon">🎯</span><span>Challenge</span></a>
+      <a href="about.html"><span class="icon">ℹ️</span><span>About</span></a>
+    </nav>
+  </div>
+
+<script>
+const VERSES_PAGE = [
+  {arabic:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", trans:"Indeed, with hardship comes ease.", ref:"94:6"},
+  {arabic:"إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", trans:"Indeed, Allah is with the patient.", ref:"2:153"},
+  {arabic:"فَاذْكُرُونِي أَذْكُرْكُمْ", trans:"So remember Me; I will remember you.", ref:"2:152"},
+  {arabic:"وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", trans:"And whoever relies upon Allah — then He is sufficient for him.", ref:"65:3"},
+  {arabic:"لَا تُكَلَّفُ نَفْسٌ إِلَّا وُسْعَهَا", trans:"No soul is burdened beyond its capacity.", ref:"2:286"}
+];
+
+function todayKey(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function choose(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+function renderVerseOfDay(){
+  try{
+    const key = todayKey();
+    const stored = localStorage.getItem('verses_day');
+    if(stored === key){
+      const saved = JSON.parse(localStorage.getItem('verses_today'));
+      if(saved){
+        document.getElementById('verse-of-day').textContent = saved.arabic + " — " + saved.trans;
+        document.getElementById('verse-of-day-ref').textContent = saved.ref;
+        return;
+      }
+    }
+    const pick = choose(VERSES_PAGE);
+    localStorage.setItem('verses_today', JSON.stringify(pick));
+    localStorage.setItem('verses_day', key);
+    document.getElementById('verse-of-day').textContent = pick.arabic + " — " + pick.trans;
+    document.getElementById('verse-of-day-ref').textContent = pick.ref;
+  }catch(e){
+    document.getElementById('verse-of-day').textContent = "Unable to load verse.";
+  }
+}
+
+function populateVerseList(){
+  const c = document.getElementById('verse-list');
+  c.innerHTML = "";
+  VERSES_PAGE.forEach(v=>{
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.style.marginBottom = '12px';
+    el.innerHTML = `<div class="arabic">${v.arabic}</div><div class="trans">${v.trans}</div><div class="meta small">${v.ref}</div>`;
+    c.appendChild(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderVerseOfDay();
+  populateVerseList();
+});
+</script>
+
+</body>
+</html>
