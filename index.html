@@ -16,17 +16,16 @@
       <section id="instagram-posts">
         <h2>Instagram Posts</h2>
         <div class="posts" aria-live="polite">
-          <!-- Embedded SVG thumbnails so posts always show without uploading images -->
           <a href="https://www.instagram.com/p/DR_9PHzk0Os/" target="_blank" rel="noopener">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='640'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%238fbf9e'/><stop offset='1' stop-color='%23668b6f'/></linearGradient></defs><rect width='100%25' height='100%25' fill='url(%23g)' rx='18' ry='18'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='white'>Post</text></svg>" alt="Post 1">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='640'><rect width='100%25' height='100%25' fill='%23243b31' rx='18'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='white'>Post</text></svg>" alt="Post 1">
           </a>
 
           <a href="https://www.instagram.com/reel/DSACgkgE08o/" target="_blank" rel="noopener">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='640'><rect width='100%25' height='100%25' fill='%230a2238' rx='18' ry='18'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%23bcd4ff'>Reel</text></svg>" alt="Reel 1">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='640'><rect width='100%25' height='100%25' fill='%23eaf8f6' rx='18'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%238fbf9e'>Reel</text></svg>" alt="Reel 1">
           </a>
 
           <a href="https://www.instagram.com/reel/DSADchnE6hv/" target="_blank" rel="noopener">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='640'><rect width='100%25' height='100%25' fill='%23f2e9e0' rx='18' ry='18'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%23666'>Reel</text></svg>" alt="Reel 2">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='640'><rect width='100%25' height='100%25' fill='%23efe3db' rx='18'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%23666'>Reel</text></svg>" alt="Reel 2">
           </a>
         </div>
       </section>
@@ -34,18 +33,21 @@
       <section id="daily-hadith">
         <h2>Hadith of the Day</h2>
         <div class="card">
-          <div id="hadith-display" class="trans">Loading...</div>
-          <div id="hadith-ref" class="meta small"></div>
+          <div id="hadith-display" class="trans">Loading hadith…</div>
+          <div id="hadith-ref" class="meta small" aria-live="polite"></div>
         </div>
       </section>
 
       <section id="daily-verse">
         <h2>Verse of the Day</h2>
         <div class="card">
-          <div id="verse-display" class="trans">Loading...</div>
-          <div id="verse-ref" class="meta small"></div>
+          <div id="verse-display" class="trans">Loading verse…</div>
+          <div id="verse-ref" class="meta small" aria-live="polite"></div>
         </div>
       </section>
+
+      <!-- rotating quote will auto-append here via JS if needed -->
+
     </main>
 
     <nav class="bottom-nav" role="navigation" aria-label="main">
@@ -70,4 +72,4 @@
 
   <script src="script.js"></script>
 </body>
-        </html>
+</html>
