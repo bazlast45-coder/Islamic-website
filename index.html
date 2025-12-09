@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Islamic Reminder - Home</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <h1>Daily Islamic Reminder</h1>
+  <nav>
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="hadiths.html"><i class="fas fa-book"></i> Hadiths</a>
+    <a href="verses.html"><i class="fas fa-scroll"></i> Verses</a>
+    <a href="challenge.html"><i class="fas fa-star"></i> 365 Challenge</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+  </nav>
+</header>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="spinner"></div>
+  <p id="loader-quote">“Verily, Allah is with the patient.” — Qur'an 2:153</p>
+</div>
+
+<!-- Main Content -->
+<div id="content" style="display:none;" class="main fade-in">
+
+  <section id="hadith" class="block">
+    <div class="arabic" id="hadith-ar">—</div>
+    <div class="translation" id="hadith-trans">Loading Hadith…</div>
+    <div class="ref" id="hadith-ref"></div>
+  </section>
+
+  <section id="verse" class="block">
+    <div class="arabic" id="verse-ar">—</div>
+    <div class="translation" id="verse-trans">Loading Verse…</div>
+    <div class="ref" id="verse-ref"></div>
+  </section>
+
+  <section>
+    <button id="show-chal" class="btn"><i class="fas fa-star"></i> Show Today's Challenge</button>
+  </section>
+
+  <section id="challenge" class="block" style="display:none;">
+    <div class="translation" id="chal-text"></div>
+    <div class="translation" id="chal-evidence"></div>
+    <button id="mark-done" class="btn secondary"><i class="fas fa-check-circle"></i> Mark Done</button>
+    <div>Completed today: <span id="done-status">No</span></div>
+  </section>
+
+</div>
+
+<footer>
+Follow on Instagram: <a href="https://instagram.com/Islamic._._dill" target="_blank">@Islamic._._dill</a>
+</footer>
+
+<script src="script.js"></script>
+</body>
+    </html>
