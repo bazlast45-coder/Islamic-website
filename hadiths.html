@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Hadiths — Islamic._._dill</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header><div class="title">Hadiths</div></header>
+    <main class="container">
+      <section>
+        <h2>Hadith of the Day</h2>
+        <div class="card">
+          <div id="hadith-of-day">Loading...</div>
+          <div id="hadith-of-day-ref" class="meta small"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>All Hadiths</h2>
+        <div id="hadith-list" style="margin-top:10px;"></div>
+        <div style="margin-top:12px"><button id="load-more" class="btn ghost">Load more</button></div>
+      </section>
+
+      <section style="margin-top:20px;">
+        <h2>Reminder</h2>
+        <div class="card">
+          <div class="arabic">اللَّهُمَّ اجْعَلْنَا مِنَ التَّوَّابِينَ</div>
+          <div class="trans">O Allah, make us among those who constantly repent.</div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="icon">🏠</span><span>Home</span></a>
+      <a href="hadiths.html" class="active"><span class="icon">📖</span><span>Hadith</span></a>
+      <a href="verses.html"><span class="icon">🕋</span><span>Verse</span></a>
+      <a href="challenge.html"><span class="icon">🎯</span><span>Challenge</span></a>
+      <a href="about.html"><span class="icon">ℹ️</span><span>About</span></a>
+    </nav>
+  </div>
+
+<script>
+/* Self-contained hadith page script with ~40 hadiths (book references only).
+   If you later want exact hadith numbers I can add them — just say so. */
+const HADITHS_PAGE = [
+  {text:"Actions are judged by intentions.", ref:"Sahih al-Bukhari"},
+  {text:"The strong believer is better than the weak believer.", ref:"Sahih Muslim"},
+  {text:"Cleanliness is half of faith.", ref:"Sahih Muslim"},
+  {text:"A smile is charity.", ref:"Tirmidhi"},
+  {text:"None of you truly believes until he wishes for his brother what he wishes for himself.", ref:"Bukhari & Muslim"},
+  {text:"Make things easy, not difficult.", ref:"Sahih al-Bukhari"},
+  {text:"Whoever guides to good will have reward like it.", ref:"Sahih Muslim"},
+  {text:"The best of you are those best to their families.", ref:"Tirmidhi"},
+  {text:"The best among you are those who learn the Qur'an and teach it.", ref:"Bukhari"},
+  {text:"Be kind to neighbors.", ref:"Sahih Muslim"},
+  {text:"Visit the sick and free captives.", ref:"Sahih Bukhari"},
+  {text:"Speak good or remain silent.", ref:"Bukhari & Muslim"},
+  {text:"Modesty is part of faith.", ref:"Bukhari & Muslim"},
+  {text:"He who does not show mercy will not be shown mercy.", ref:"Bukhari & Muslim"},
+  {text:"Lower your gaze.", ref:"Prophetic guidance"},
+  {text:"Protect your tongue; it causes much good and much evil.", ref:"Scholarly advice"},
+  {text:"Visit the graves to remember death.", ref:"Sahih Muslim"},
+  {text:"Help your brother whether he is oppressor or oppressed.", ref:"Prophetic guidance"},
+  {text:"Perfect your work.", ref:"Al-Bayhaqi"},
+  {text:"The best charity is that given in Ramadan.", ref:"Tirmidhi"},
+  {text:"Feed the hungry and pray for the sick.", ref:"Prophetic guidance"},
+  {text:"Do not waste water even if at a running river.", ref:"Sunan Ibn Majah"},
+  {text:"Offer sincere dawah with wisdom and good counsel.", ref:"Qur'anic emphasis / Prophetic tradition"},
+  {text:"Forgive and you shall be forgiven.", ref:"Sahih Muslim (theme)"},
+  {text:"Keep ties of kinship.", ref:"Bukhari & Muslim (theme)"},
+  {text:"The best of you are those who are best to women.", ref:"Tirmidhi"},
+  {text:"Consult in affairs (Shura).", ref:"Prophetic practice"},
+  {text:"The believer does not slander, curse or speak obscenely.", ref:"Sahih Muslim"},
+  {text:"Relieve a believer's burden and Allah will relieve yours.", ref:"Sahih Muslim"},
+  {text:"Pray as if it's your last prayer.", ref:"Scholarly admonition"},
+  {text:"Be punctual in observing prayer.", ref:"Prophetic practice"},
+  {text:"Seek forgiveness frequently.", ref:"Bukhari & Muslim (theme)"},
+  {text:"Give to relatives first when giving charity.", ref:"Sunan Abu Dawud"},
+  {text:"Be truthful; truth leads to righteousness.", ref:"Bukhari & Muslim (theme)"},
+  {text:"Avoid extravagance and be moderate.", ref:"Prophetic guidance"},
+  {text:"Be honest in trade and business.", ref:"Sahih Muslim"},
+  {text:"Remember death frequently; it softens the heart.", ref:"Sahih Muslim"},
+  {text:"Be patient and you will be rewarded.", ref:"Qur'anic and Prophetic teaching"}
+];
+
+function todayKey(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function choose(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function renderHadithOfDay(){
+  try{
+    const key = todayKey();
+    const storedDay = localStorage.getItem('hadiths_day');
+    if(storedDay === key){
+      const saved = JSON.parse(localStorage.getItem('hadiths_today'));
+      if(saved){
+        document.getElementById('hadith-of-day').textContent = `"${saved.text}"`;
+        document.getElementById('hadith-of-day-ref').textContent = `Reference: ${saved.ref}`;
+        return;
+      }
+    }
+    const pick = choose(HADITHS_PAGE);
+    localStorage.setItem('hadiths_today', JSON.stringify(pick));
+    localStorage.setItem('hadiths_day', key);
+    document.getElementById('hadith-of-day').textContent = `"${pick.text}"`;
+    document.getElementById('hadith-of-day-ref').textContent = `Reference: ${pick.ref}`;
+  }catch(e){
+    document.getElementById('hadith-of-day').textContent = "Unable to load hadith.";
+  }
+}
+
+function populateHadithList(limit=6){
+  const cont = document.getElementById('hadith-list');
+  cont.innerHTML = "";
+  for(let i=0;i<Math.min(limit, HADITHS_PAGE.length); i++){
+    const h = HADITHS_PAGE[i];
+    const div = document.createElement('div');
+    div.className = "card";
+    div.style.marginBottom = "12px";
+    div.innerHTML = `<div style="font-size:16px">${h.text}</div><div class="meta small">${h.ref}</div>`;
+    cont.appendChild(div);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderHadithOfDay();
+  populateHadithList(6);
+  document.getElementById('load-more').addEventListener('click', ()=>{
+    populateHadithList(HADITHS_PAGE.length);
+    document.getElementById('load-more').style.display = 'none';
+  });
+});
+</script>
+</body>
+        </html>
