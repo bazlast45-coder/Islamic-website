@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Islamic._._dill — Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- HEADER -->
+    <header>
+      <div class="title">Islamic._._dill</div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+      <!-- INSTAGRAM POSTS -->
+      <section id="instagram-posts">
+        <h2>Instagram Posts</h2>
+        <div class="posts">
+
+          <!-- POST 1 -->
+          <a href="https://www.instagram.com/p/DR_9PHzk0Os/" target="_blank">
+            <img
+              src="https://raw.githubusercontent.com/bazlast45-coder/Islamic-website/main/post1.jpg"
+              onerror="this.src='https://via.placeholder.com/300x300/8fbf9e/ffffff?text=Post';"
+              alt="Instagram Post"
+            >
+          </a>
+
+          <!-- REEL 1 -->
+          <a href="https://www.instagram.com/reel/DSACgkgE08o/" target="_blank">
+            <img
+              src="https://raw.githubusercontent.com/bazlast45-coder/Islamic-website/main/post2.jpg"
+              onerror="this.src='https://via.placeholder.com/300x300/0a2238/bcd4ff?text=Reel';"
+              alt="Instagram Reel"
+            >
+          </a>
+
+          <!-- REEL 2 -->
+          <a href="https://www.instagram.com/reel/DSADchnE6hv/" target="_blank">
+            <img
+              src="https://raw.githubusercontent.com/bazlast45-coder/Islamic-website/main/post3.jpg"
+              onerror="this.src='https://via.placeholder.com/300x300/f2e9e0/666?text=Reel';"
+              alt="Instagram Reel"
+            >
+          </a>
+
+        </div>
+      </section>
+
+      <!-- HADITH OF THE DAY -->
+      <section id="daily-hadith">
+        <h2>Hadith of the Day</h2>
+        <div class="card">
+          <div id="hadith-display">Loading...</div>
+          <div id="hadith-ref" class="meta small"></div>
+        </div>
+      </section>
+
+      <!-- VERSE OF THE DAY -->
+      <section id="daily-verse">
+        <h2>Verse of the Day</h2>
+        <div class="card">
+          <div id="verse-display">Loading...</div>
+          <div id="verse-ref" class="meta small"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION (INSTAGRAM STYLE) -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="active">
+        <span class="icon">🏠</span>
+        <span>Home</span>
+      </a>
+
+      <a href="hadiths.html">
+        <span class="icon">📖</span>
+        <span>Hadith</span>
+      </a>
+
+      <a href="verses.html">
+        <span class="icon">🕋</span>
+        <span>Verse</span>
+      </a>
+
+      <a href="challenge.html">
+        <span class="icon">🎯</span>
+        <span>Challenge</span>
+      </a>
+
+      <a href="about.html">
+        <span class="icon">ℹ️</span>
+        <span>About</span>
+      </a>
+    </nav>
+
+    <!-- MODAL (POPUP FOR DETAILS) -->
+    <div id="modal-bg" class="modal-bg" onclick="closeModal(event)">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <div class="modal-title">Details</div>
+          <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+        <div id="modal-content"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+              </html>
