@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verses — Islamic._._dill</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header><div class="title">Qur'an Verses</div></header>
+    <main class="container">
+      <section>
+        <h2>Verse of the Day</h2>
+        <div class="card">
+          <div id="verse-of-day">Loading...</div>
+          <div id="verse-of-day-ref" class="meta small"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>All Verses</h2>
+        <div id="verse-list" style="margin-top:10px;"></div>
+      </section>
+
+      <section style="margin-top:18px;">
+        <h2>Reflection</h2>
+        <div class="card">
+          <div class="trans">"Remembrance of Allah softens the heart." — short reminder</div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="icon">🏠</span><span>Home</span></a>
+      <a href="hadiths.html"><span class="icon">📖</span><span>Hadith</span></a>
+      <a href="verses.html" class="active"><span class="icon">🕋</span><span>Verse</span></a>
+      <a href="challenge.html"><span class="icon">🎯</span><span>Challenge</span></a>
+      <a href="about.html"><span class="icon">ℹ️</span><span>About</span></a>
+    </nav>
+  </div>
+
+<script>
+/* Verses list — 40 short reminders with references (Surah:Ayah) */
+const VERSES_PAGE = [
+  {arabic:"فَاذْكُرُونِي أَذْكُرْكُمْ", trans:"So remember Me; I will remember you.", ref:"2:152"},
+  {arabic:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", trans:"Indeed, with hardship comes ease.", ref:"94:6"},
+  {arabic:"وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", trans:"And whoever relies upon Allah — then He is sufficient for him.", ref:"65:3"},
+  {arabic:"لَا تُكَلَّفُ نَفْسٌ إِلَّا وُسْعَهَا", trans:"No soul is burdened beyond its capacity.", ref:"2:286"},
+  {arabic:"إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ", trans:"The believers are but brothers.", ref:"49:10"},
+  {arabic:"مَا أَنْفَقْتُمْ مِنْ خَيْرٍ", trans:"Whatever good you put forward for yourselves.", ref:"2:272"},
+  {arabic:"قُلْ هُوَ اللَّهُ أَحَدٌ", trans:"Say: He is Allah, [Who is] One.", ref:"112:1"},
+  {arabic:"ادْعُونِي أَسْتَجِبْ لَكُمْ", trans:"Call upon Me; I will respond to you.", ref:"40:60"},
+  {arabic:"أَقِمِ الصَّلَاةَ لِذِكْرِي", trans:"Establish prayer for My remembrance.", ref:"20:14"},
+  {arabic:"وَأَقِمِ الصَّلَاةَ وَآتِ الزَّكَاةَ", trans:"And establish prayer and give zakah.", ref:"2:43"},
+  {arabic:"وَأَن لَّيْسَ لِلْإِنْسَانِ إِلَّا مَا سَعَى", trans:"And that there is not for man except that [good] for which he strives.", ref:"53:39"},
+  {arabic:"وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا", trans:"Whoever does an atom's weight of good...", ref:"99:7"},
+  {arabic:"إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ", trans:"Indeed, Allah loves the doers of good.", ref:"2:195"},
+  {arabic:"وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَى", trans:"And cooperate in righteousness and piety.", ref:"5:2"},
+  {arabic:"ادْفَعْ بِالَّتِي هِيَ أَحْسَنُ", trans:"Repel [evil] by that which is best.", ref:"41:34"},
+  {arabic:"إِنَّ اللّهَ مَعَ الصَّابِرِينَ", trans:"Indeed, Allah is with the patient.", ref:"2:153"},
+  {arabic:"وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ", trans:"And seek help through patience and prayer.", ref:"2:45"},
+  {arabic:"أَوْفُوا بِالْعُقُودِ", trans:"Fulfill [every] commitment.", ref:"17:34"},
+  {arabic:"وَقُلِ اعْمَلُوا فَسَيَرَى اللَّهُ", trans:"And say, 'Do [as you will];' Allah will see.", ref:"9:105"},
+  {arabic:"وَمَا تُقَدِّمُوا لِأَنفُسِكُمْ", trans:"And whatever you put forward for yourselves...", ref:"2:110"},
+  {arabic:"وَمَنْ يُقْرِضِ اللَّهَ قَرْضًا حَسَنًا", trans:"Whoever lends to Allah a goodly loan...", ref:"57:11"},
+  {arabic:"فَلا تَهِنُوا","trans":"So do not weaken", ref:"3:139"},
+  {arabic:"يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ", trans:"O you who have believed, fear Allah.", ref:"4:1"},
+  {arabic:"وَاصْبِرْ وَمَا صَبْرُكَ إِلَّا بِاللَّهِ", trans:"And be patient; and your patience is not but through Allah.", ref:"16:127"},
+  {arabic:"وَسَارِعُوا إِلَى مَغْفِرَةٍ", trans:"And hasten to forgiveness from your Lord.", ref:"3:133"},
+  {arabic:"إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ", trans:"You alone we worship, and You alone we ask for help.", ref:"1:5"},
+  {arabic:"إِنَّ اللَّهَ يُحِبُّ التَّوَّابِينَ", trans:"Indeed, Allah loves those who are constantly repentant.", ref:"2:222"},
+  {arabic:"وَمَا كَانَ اللَّهُ لِيُضِلَّ قَوْمًا بَعْدَ إِذْ هَدَاهُمْ", trans:"Allah would not cause your faith to be lost.", ref:"3:8"},
+  {arabic:"وَلا تَلْقَوْا بِأَيْدِيكُمْ إِلَى التَّهْلُكَةِ", trans:"And do not throw [yourselves] with your [own] hands into destruction.", ref:"2:195"},
+  {arabic:"إِنَّ هَذَا الْقُرْآنَ يَهْدِي لِلَّتِي هِيَ أَقْوَمُ", trans:"Indeed, this Qur'an guides to that which is most suitable.", ref:"17:9"},
+  {arabic:"وَقُل رَّبِّ زِدْنِي عِلْمًا", trans:"And say, 'My Lord, increase me in knowledge.'", ref:"20:114"},
+  {arabic:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا", trans:"Indeed, with hardship [will be] ease.", ref:"94:5-6 (concise)"},
+  {arabic:"أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", trans:"Unquestionably, by the remembrance of Allah hearts are assured.", ref:"13:28"},
+  {arabic:"وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ", trans:"And We made from water every living thing.", ref:"21:30"},
+  {arabic:"يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم", trans:"O mankind, indeed We have created you from male and female.", ref:"49:13 (theme)"},
+  {arabic:"يَا أَيُّهَا الَّذِينَ آمَنُوا كُونُوا قَوَّامِينَ بِالْقِسْطِ", trans:"O you who have believed, be persistently standing firm in justice.", ref:"4:135"},
+  {arabic:"وَاعْبُدْ رَبَّكَ حَتَّى يَأْتِيَكَ الْيَقِينُ", trans:"And worship your Lord until there comes to you the certainty (death).", ref:"15:99"}
+];
+
+function todayKey(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function choose(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+function renderVerseOfDay(){
+  try{
+    const key=todayKey();
+    if(localStorage.getItem('verses_day') !== key){
+      const pick=choose(VERSES_PAGE);
+      localStorage.setItem('verses_today', JSON.stringify(pick));
+      localStorage.setItem('verses_day', key);
+    }
+    const cur = JSON.parse(localStorage.getItem('verses_today') || '{}');
+    document.getElementById('verse-of-day').textContent = (cur.arabic ? cur.arabic + ' ' : '') + (cur.trans || '');
+    document.getElementById('verse-of-day-ref').textContent = cur.ref || '';
+  }catch(e){
+    document.getElementById('verse-of-day').textContent = "Unable to load verse.";
+  }
+}
+
+function populateVerseList(){
+  const c = document.getElementById('verse-list'); c.innerHTML = "";
+  VERSES_PAGE.forEach(v=>{
+    const el = document.createElement('div'); el.className='card'; el.style.marginBottom='12px';
+    el.innerHTML = `<div class="arabic">${v.arabic}</div><div class="trans">${v.trans}</div><div class="meta small">${v.ref}</div>`;
+    c.appendChild(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderVerseOfDay();
+  populateVerseList();
+});
+</script>
+</body>
+            </html>
