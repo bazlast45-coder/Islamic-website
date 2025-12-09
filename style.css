@@ -1,39 +1,38 @@
 :root{
   --bg:#0f0f10;
-  --card:#fff;
+  --card:#111216;
   --muted:#cfc6b8;
   --accent:#c79a3b;
   --text:#f7f7f7;
   --app-width:420px;
-  --shadow: 0 6px 18px rgba(0,0,0,0.35);
+  --shadow: 0 6px 18px rgba(0,0,0,0.45);
 }
 
-/* basic reset */
+/* reset */
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;font-family:Inter, system-ui, Arial, sans-serif}
 
-/* elegant background: dark with gold gradient and faint flowers at top */
+/* enhance background gradient + visible floral line */
 body::before{
   content: "";
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    radial-gradient(1200px 300px at 50% 0%, rgba(199,154,59,0.06), transparent 20%),
-    linear-gradient(180deg, rgba(12,12,12,1), rgba(22,18,16,1));
+    linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.6) 50%),
+    radial-gradient(1000px 300px at 50% 0%, rgba(199,154,59,0.08), transparent 20%);
   pointer-events:none;
   z-index:0;
 }
 
-/* decorative faint floral svg line at the top (subtle) */
+/* Make the decorative floral path more visible */
 body::after{
   content:"";
   position:fixed;
   left:0;
   right:0;
   top:0;
-  height:140px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="140"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="%23c79a3b" stop-opacity="0.06"/><stop offset="1" stop-color="%23c79a3b" stop-opacity="0.02"/></linearGradient></defs><g fill="none" stroke="url(%23g)" stroke-width="1.2" opacity="0.9"><path d="M0 120 C150 20, 350 40, 500 70 C650 100, 850 50, 1000 120"/></g></svg>');
+  height:160px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="160"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="%23c79a3b" stop-opacity="0.12"/><stop offset="1" stop-color="%23c79a3b" stop-opacity="0.06"/></linearGradient></defs><g fill="none" stroke="url(%23g)" stroke-width="1.6" opacity="0.95"><path d="M0 120 C140 10, 320 40, 500 70 C680 100, 860 40, 1200 120"/></g></svg>');
   background-repeat:no-repeat;
   background-position:center top;
   background-size:cover;
@@ -42,42 +41,40 @@ body::after{
   mix-blend-mode:overlay;
 }
 
-/* app shell centers content and constrains width */
+/* shell */
 .app-shell{position:relative;max-width:var(--app-width);margin:0 auto;min-height:100vh;display:flex;flex-direction:column;z-index:1}
 
-/* small header */
+/* header */
 header{height:54px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.04);background:transparent;position:sticky;top:0;z-index:10}
 header .title{font-weight:700;font-size:18px;color:var(--text);letter-spacing:0.2px}
 
-/* container ensures content stands out over bg */
-.container{padding:12px 14px 130px;flex:1}
+/* main container */
+.container{padding:14px 14px 140px;flex:1}
 
-/* posts grid - cards with soft translucent background */
+/* posts */
 .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
 .posts a{display:block;border-radius:12px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03)}
 .posts img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* sections and cards with slight luminous edges */
+/* sections */
 section{margin:14px 0}
 h2{font-size:16px;margin:0 0 8px 0;font-weight:700;color:var(--text)}
 .card{
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.02);
   border-radius:14px;
   padding:12px;
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.03);
   box-shadow: 0 8px 24px rgba(0,0,0,0.45);
   color:var(--text);
 }
 
-/* text styles */
+/* text */
 .trans{font-size:15px;line-height:1.38;color:var(--text)}
 .arabic{font-family:"Noto Naskh Arabic", serif;font-size:18px;color:#fff}
 .meta{font-size:12px;color:var(--muted);margin-top:8px}
-
-/* small muted text and quotes */
 .small{font-size:13px;color:var(--muted)}
 
-/* lists (hadith & verse) */
+/* lists & cards */
 .grid-list{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px}
 .list-card{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));display:flex;flex-direction:column}
 
@@ -85,7 +82,12 @@ h2{font-size:16px;margin:0 0 8px 0;font-weight:700;color:var(--text)}
 .btn{background:var(--accent);color:#fff;padding:9px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent)}
 
-/* bottom nav, compact and light */
+/* modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.55);display:none;align-items:center;justify-content:center;z-index:95}
+.modal{background:#0f0f12;border-radius:12px;padding:14px;max-width:520px;width:92%;max-height:80vh;overflow:auto;border:1px solid rgba(255,255,255,0.03)}
+.close-btn{background:transparent;border:0;font-size:18px;cursor:pointer;color:var(--muted)}
+
+/* bottom nav */
 .bottom-nav{
   position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:var(--app-width);height:64px;background:rgba(12,12,12,0.98);border-top:1px solid rgba(255,255,255,0.03);
   display:flex;justify-content:space-around;align-items:center;z-index:20;padding-bottom:env(safe-area-inset-bottom);
@@ -97,9 +99,6 @@ h2{font-size:16px;margin:0 0 8px 0;font-weight:700;color:var(--text)}
 /* responsive */
 @media(max-width:420px){
   :root{--app-width:100vw}
-  .container{padding:10px 10px 140px}
+  .container{padding:12px 10px 140px}
   .posts{gap:6px}
-}
-
-/* make sure images fallback nicely */
-img{max-width:100%;height:auto;display:block}
+           }
