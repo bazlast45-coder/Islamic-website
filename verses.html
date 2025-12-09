@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verses — Islamic._._dill</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header><div class="title">Qur'an Verses</div></header>
+    <main class="container">
+      <section>
+        <h2>Verse of the Day</h2>
+        <div class="card">
+          <div id="verse-display-page" class="trans">Loading...</div>
+          <div id="verse-display-ref" class="meta small"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>All Verses</h2>
+        <div id="verse-list" class="grid-list"></div>
+        <div style="margin-top:10px;text-align:center">
+          <button id="load-more-verses" class="btn">Load more</button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="index.html">🏠<span>Home</span></a>
+      <a href="hadiths.html">📖<span>Hadith</span></a>
+      <a href="verses.html" class="active">🕋<span>Verse</span></a>
+      <a href="challenge.html">🎯<span>Challenge</span></a>
+      <a href="about.html">ℹ️<span>About</span></a>
+    </nav>
+
+    <div id="modal-bg" class="modal-bg" onclick="closeModal(event)">
+      <div class="modal" role="dialog" aria-modal="true" onClick="event.stopPropagation()">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-weight:700">Verse</div>
+          <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+        <div id="modal-content" style="margin-top:10px"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+  </html>
