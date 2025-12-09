@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Islamic._._dill</title>
+<link rel="icon" href="data:," />
+<style>
+  :root{
+    --bg:#0c0c0c;
+    --card:#111;
+    --muted:#bfb6d8;
+    --accent:#d7c6ff;
+    --gold: #caa94a;
+  }
+  html,body{height:100%;margin:0;font-family: system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{
+    background: radial-gradient(ellipse at top, rgba(202,169,74,0.06) 0%, transparent 35%), var(--bg);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  /* subtle floral-like decorative strip at top (faint) */
+  .floral {
+    height:120px;
+    pointer-events:none;
+    background-image:
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.02) 0 10%, transparent 30%),
+      linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    margin-bottom:10px;
+  }
+
+  .container{max-width:760px;margin:0 auto;padding:16px 18px 120px;}
+  header{ text-align:center;padding:6px 0 12px; }
+  h1{font-size:34px;margin:6px 0 12px;font-weight:700; color:#fff; letter-spacing:0.4px;}
+  h2{font-size:20px;margin:18px 0 10px;color:var(--accent);}
+
+  .thumb-row{display:flex;gap:14px;align-items:flex-start;flex-wrap:nowrap;}
+  .thumb{
+    width:110px;height:110px;border-radius:18px;background:linear-gradient(180deg,#f3ede9 0,#efe7e2 100%);box-shadow:0 6px 22px rgba(0,0,0,0.6);
+    overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03);
+    flex:0 0 110px;
+  }
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .thumb-caption{color:var(--muted);text-align:center;margin-top:8px;font-size:16px;}
+  .help{color:var(--muted);text-align:center;margin:14px 0 0;}
+
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;margin:12px 0;border:1px solid rgba(255,255,255,0.03);}
+  .card .title{font-weight:700;font-size:18px;margin-bottom:8px;}
+  .card .meta{color:var(--muted);font-size:14px;margin-top:6px;}
+  .verse-ar{font-size:20px;text-align:center;margin-top:20px;color:#fff;font-family: "Segoe UI",Roboto, "Noto Nastaliq Urdu", serif;}
+
+  /* hadith list */
+  .hadith-item{padding:18px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.03);margin-bottom:14px;}
+  .hadith-title{font-size:18px;color:#fff;margin-bottom:6px;}
+  .hadith-ref{color:var(--muted);font-size:14px;}
+
+  /* challenge */
+  .challenge-area .controls{margin-top:12px;display:flex;gap:10px;align-items:center;}
+  .btn{background:#fff;color:#111;padding:8px 12px;border-radius:6px;border:none;cursor:pointer;}
+  .preview-box{display:inline-block;padding:6px 12px;border-radius:8px;border:1px dashed rgba(255,255,255,0.06);color:var(--muted);}
+
+  /* bottom nav */
+  .bottom-nav{position:fixed;left:0;right:0;bottom:0;height:72px;background:linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.8));display:flex;align-items:center;justify-content:center;border-top:1px solid rgba(255,255,255,0.03);}
+  .nav-inner{max-width:760px;width:100%;display:flex;justify-content:space-around;align-items:center;padding:0 6px;}
+  .nav-item{display:flex;flex-direction:column;align-items:center;color:var(--muted);font-size:12px;text-decoration:none;}
+  .nav-item svg{width:26px;height:26px;margin-bottom:6px;fill:transparent;stroke:var(--muted);stroke-width:1.6;}
+  .nav-item.active{color:var(--gold);}
+  .nav-item.active svg{stroke:var(--gold);}
+
+  /* links row at bottom of page for desktops */
+  .site-links{display:flex;gap:12px;flex-wrap:wrap;color:var(--accent);margin-top:10px;}
+  a{color:var(--accent);text-decoration:underline;}
+
+  /* responsive adjustments */
+  @media (max-width:460px){
+    .thumb{width:86px;height:86px;border-radius:14px;flex:0 0 86px;}
+    .container{padding:12px;}
+    h1{font-size:28px;}
+  }
+</style>
+</head>
+<body>
+  <div class="floral" aria-hidden="true"></div>
+  <div class="container" id="app">
+    <header>
+      <h1>Islamic._._dill</h1>
+    </header>
+
+    <section id="instagram">
+      <h2>Instagram Posts</h2>
+      <div class="thumb-row" id="thumbRow" role="list">
+        <!-- thumbnails added by JS -->
+        <div class="thumb">
+          <a id="thumb1" target="_blank" rel="noopener noreferrer" href="#">
+            <img alt="Post 1 thumbnail" id="timg1" src="c982a0919d0642a1485e891a7e335460.jpg">
+          </a>
+        </div>
+        <div class="thumb">
+          <a id="thumb2" target="_blank" rel="noopener noreferrer" href="#">
+            <img alt="Reel 1 thumbnail" id="timg2" src="f3dfb5de51bdd62514272210ac68ff86.jpg">
+          </a>
+        </div>
+        <div class="thumb">
+          <a id="thumb3" target="_blank" rel="noopener noreferrer" href="#">
+            <img alt="Reel 2 thumbnail" id="timg3" src="a0f67c7782bd7ac3077ef6dbe66222fa.jpg">
+          </a>
+        </div>
+      </div>
+
+      <div class="thumb-caption">
+        <a id="link1" target="_blank" rel="noopener noreferrer" href="#">Post 1</a>&nbsp;&nbsp;
+        <a id="link2" target="_blank" rel="noopener noreferrer" href="#">Reel 1</a>&nbsp;&nbsp;
+        <a id="link3" target="_blank" rel="noopener noreferrer" href="#">Reel 2</a>
+      </div>
+      <div class="help">Tap a thumbnail to open the Instagram post (opens in a new tab).</div>
+    </section>
+
+    <section id="hadithSection" style="margin-top:18px;">
+      <h2>Hadith of the Day</h2>
+      <div id="hadithDay" class="card">
+        <div class="title" id="hadithTitle">Loading...</div>
+        <div class="meta" id="hadithRef"></div>
+      </div>
+
+      <h2>Verse of the Day</h2>
+      <div id="verseDay" class="card">
+        <div style="font-size:16px;" id="verseMain">Loading...</div>
+        <div class="meta" id="verseRef"></div>
+      </div>
+
+      <div class="verse-ar" id="verseBig">وَوَجَدَكَ ضَالًّا فَهَدَى — “And He found you lost and guided you.” — Qur'an 93:7</div>
+    </section>
+
+    <section id="challengeSection" style="margin-top:22px;">
+      <h2>365-Day Challenge</h2>
+      <div class="card challenge-area" id="challengeCard">
+        <div id="todayChallenge">Loading...</div>
+        <div class="controls">
+          <button class="btn" id="markDoneBtn">Mark Done</button>
+          <div class="preview-box" id="previewBox">Preview 1/5</div>
+          <button class="btn" id="previewBtn">Preview ▶</button>
+        </div>
+      </div>
+      <h2>History (Completed)</h2>
+      <div id="historyList" class="card" style="min-height:40px">No completed challenges yet.</div>
+    </section>
+
+    <div style="height:36px;"></div>
+    <div class="site-links" aria-hidden="true">
+      <!-- quick links for debugging -->
+      <a href="./">Home</a>
+      <a href="./hadiths.html">Hadith</a>
+      <a href="./verses.html">Verse</a>
+      <a href="./challenge.html">Challenge</a>
+      <a href="./about.html">About</a>
+    </div>
+  </div>
+
+  <!-- bottom nav (inline SVG icons to ensure display) -->
+  <nav class="bottom-nav" aria-hidden="false">
+    <div class="nav-inner">
+      <a class="nav-item active" href="./index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5L12 4l9 7.5"/></svg><span>Home</span></a>
+      <a class="nav-item" href="./hadiths.html"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/ ></svg><span>Hadith</span></a>
+      <a class="nav-item" href="./verses.html"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M3 8h18"/></svg><span>Verse</span></a>
+      <a class="nav-item" href="./challenge.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8" /></svg><span>Challenge</span></a>
+      <a class="nav-item" href="./about.html"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M9.5 9.5h5"/><path d="M9.5 13.5h5"/></svg><span>About</span></a>
+    </div>
+  </nav>
+
+<script>
+/*
+  index.html JS:
+  - Link thumbnails to instagram reels (user provided)
+  - Build hadiths (40) and verses (40) arrays
+  - Show daily hadith/verse based on day index
+  - Implement challenge preview (max 5 previews) and Mark Done
+  - Use localStorage for challenge history and to avoid duplicate for same day
+*/
+
+/* === INSTAGRAM LINKS (the ones you provided) === */
+const instagramLinks = [
+  "https://www.instagram.com/islamic._._dill/reel/DSACgkgE08o/",
+  "https://www.instagram.com/islamic._._dill/reel/DSDEvHhkyRs/",
+  "https://www.instagram.com/islamic._._dill/reel/DSADchnE6hv/"
+];
+
+document.getElementById('thumb1').href = instagramLinks[0];
+document.getElementById('link1').href = instagramLinks[0];
+document.getElementById('thumb2').href = instagramLinks[1];
+document.getElementById('link2').href = instagramLinks[1];
+document.getElementById('thumb3').href = instagramLinks[2];
+document.getElementById('link3').href = instagramLinks[2];
+
+/* === HADITHS & VERSES (we generate 40 each by seeding a few examples) === */
+const hadithSeed = [
+  {text: "Actions are judged by intentions.", ref: "Sahih al-Bukhari (1)"},
+  {text: "The strong believer is better than the weak believer.", ref: "Sahih Muslim"},
+  {text: "Cleanliness is half of faith.", ref: "Sahih Muslim"},
+  {text: "A smile is charity.", ref: "Tirmidhi"},
+  {text: "None of you truly believes until he wishes for his brother what he wishes for himself.", ref:"Bukhari & Muslim"},
+  {text: "Pray as if it were your last prayer.", ref: "Spiritual advice"},
+  {text: "The Prophet loved perfume and cleanliness.", ref: "Sunan an-Nasa'i"},
+  {text: "Good character is the best of wealth.", ref: "Prophetic counsel"}
+];
+
+const verseSeed = [
+  {text: "So remember Me; I will remember you.", ref: "2:152"},
+  {text: "Indeed, with hardship comes ease.", ref: "94:6"},
+  {text: "And He found you lost and guided you.", ref: "93:7"},
+  {text: "Say, O disbelievers…", ref: "109:1"},
+  {text: "Fear Allah and speak words of appropriate justice.", ref: "33:70"}
+];
+
+// build arrays of 40 by repeating seed
+const hadiths = Array.from({length:40}, (_,i)=> hadithSeed[i % hadithSeed.length]);
+const verses = Array.from({length:40}, (_,i)=> verseSeed[i % verseSeed.length]);
+
+/* daily index based on date (so it changes each day) */
+const todayIndex = (() => {
+  const d = new Date();
+  // day of year for better rotation
+  const start = new Date(d.getFullYear(),0,0);
+  const diff = d - start + ((start.getTimezoneOffset() - d.getTimezoneOffset()) * 60000);
+  const dayOfYear = Math.floor(diff/86400000);
+  return dayOfYear % 40;
+})();
+
+function showDaily() {
+  const hd = hadiths[todayIndex];
+  document.getElementById('hadithTitle').textContent = `"${hd.text}"`;
+  document.getElementById('hadithRef').textContent = `Reference: ${hd.ref}`;
+
+  const vs = verses[todayIndex];
+  document.getElementById('verseMain').textContent = `${vs.text}`;
+  document.getElementById('verseRef').textContent = `${vs.ref}`;
+}
+
+showDaily();
+
+/* === CHALLENGE LOGIC === */
+const challenges = [
+  "Send a kind message to a family member.",
+  "Avoid backbiting for the whole day.",
+  "Give water to someone in need.",
+  "Donate a small amount to charity.",
+  "Help someone carry groceries.",
+  "Compliment a stranger sincerely.",
+  "Read 3 short surahs.",
+  "Say 'Bismillah' before every meal today.",
+  "Spend 10 minutes in quiet reflection.",
+  "Smile at three people today."
+];
+
+// preview mechanics: user requested only up to 5 previews
+let previewCount = parseInt(localStorage.getItem('previewCount') || "0", 10);
+let previewIndex = parseInt(localStorage.getItem('previewIndex') || "0", 10);
+
+const previewBox = document.getElementById('previewBox');
+const previewBtn = document.getElementById('previewBtn');
+const todayChallengeEl = document.getElementById('todayChallenge');
+const historyList = document.getElementById('historyList');
+const markDoneBtn = document.getElementById('markDoneBtn');
+
+function setChallengeText(text){
+  todayChallengeEl.textContent = text;
+}
+
+function updatePreviewBox(){
+  previewBox.textContent = `Preview ${Math.min(previewCount,5) || 1}/5`;
+}
+
+function loadTodayChallenge(){
+  // if already marked done for today, show message
+  const lastDone = localStorage.getItem('challengeDoneDate');
+  const todayISO = new Date().toISOString().slice(0,10);
+  if(lastDone === todayISO){
+    setChallengeText("You've already completed today's challenge. Check History.");
+    markDoneBtn.disabled = true;
+    previewBtn.disabled = true;
+    previewBox.textContent = "Completed";
+    return;
+  }
+  // default show challenge at previewIndex
+  const idx = previewIndex % challenges.length;
+  setChallengeText(challenges[idx]);
+  markDoneBtn.disabled = false;
+  previewBtn.disabled = false;
+  updatePreviewBox();
+}
+
+previewBtn.addEventListener('click',()=>{
+  // only allow up to 5 previews total (persisted)
+  if(previewCount >= 5){
+    alert("Preview limit reached (5). You can mark the current one done or wait for next update.");
+    return;
+  }
+  previewCount++;
+  previewIndex = (previewIndex + 1) % challenges.length;
+  localStorage.setItem('previewCount', previewCount);
+  localStorage.setItem('previewIndex', previewIndex);
+  updatePreviewBox();
+  loadTodayChallenge();
+});
+
+markDoneBtn.addEventListener('click', ()=>{
+  const todayISO = new Date().toISOString().slice(0,10);
+  // push to history
+  const history = JSON.parse(localStorage.getItem('challengeHistory') || "[]");
+  history.unshift({date: todayISO, task: todayChallengeEl.textContent});
+  localStorage.setItem('challengeHistory', JSON.stringify(history));
+  localStorage.setItem('challengeDoneDate', todayISO);
+  showHistory();
+  loadTodayChallenge();
+});
+
+/* show history */
+function showHistory(){
+  const history = JSON.parse(localStorage.getItem('challengeHistory') || "[]");
+  if(!history.length){
+    historyList.textContent = "No completed challenges yet.";
+    return;
+  }
+  historyList.innerHTML = history.map(h => `<div style="padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)">${h.date} — ${h.task}</div>`).join('');
+}
+showHistory();
+
+/* initialize preview values if not set */
+if(!localStorage.getItem('previewCount')) localStorage.setItem('previewCount','0');
+if(!localStorage.getItem('previewIndex')) localStorage.setItem('previewIndex','0');
+
+previewCount = parseInt(localStorage.getItem('previewCount'),10);
+previewIndex = parseInt(localStorage.getItem('previewIndex'),10);
+updatePreviewBox();
+loadTodayChallenge();
+
+/* === small safe polyfills and helpers === */
+window.addEventListener('load', ()=>{
+  // ensure images have alt text; if remote images fail we still show local jpgs
+  ['timg1','timg2','timg3'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && !el.src) {
+      el.src = 'placeholder.jpg';
+    }
+  });
+});
+
+/* extra: if you want a full hadith list page to be auto-populated, we can generate it similarly.
+   For now the main page shows daily hadith/verse and challenge functionality.
+*/
+
+</script>
+</body>
+  </html>
