@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Islamic._._dill</title>
+
+<!-- Basic inline styles (dark elegant theme). Adjust colors if you want. -->
+<style>
+  :root{
+    --bg:#0b0b0b;
+    --card:#111;
+    --muted:#bfb6c6;
+    --accent:#c9a84d; /* gold-ish */
+    --soft:#1b1b1b;
+    --rounded:14px;
+  }
+  html,body{height:100%;margin:0;font-family: "Inter", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: linear-gradient(180deg, rgba(8,8,8,1) 0%, rgba(12,10,12,1) 50%); color:#f3f3f3;}
+  a{color:#b18de6}
+  header{padding:20px 16px 6px;text-align:center;background: linear-gradient(0deg, rgba(12,12,12,0.0), rgba(0,0,0,0));}
+  h1{font-family: 'Times New Roman', serif; margin:8px 0 18px;font-size:32px;letter-spacing:1px;}
+  main{padding:0 16px 90px; max-width:900px;margin:0 auto;}
+  .section-title{font-size:22px;margin:20px 0 8px;color:#d9c7f2}
+  /* thumbnails */
+  .thumb-row{display:flex;gap:14px;align-items:center;justify-content:flex-start;overflow:hidden;padding-bottom:6px}
+  .thumb{width:94px;height:94px;border-radius:18px;background:var(--soft);box-shadow:0 4px 12px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 94px;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb-link{display:inline-block;margin-top:8px;color:#c9a8ff;text-decoration:underline}
+  .note{color:var(--muted);text-align:center;margin:10px 0 18px}
+
+  /* card */
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:18px;box-shadow:0 6px 18px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.03);margin-bottom:16px;}
+  .card h3{margin:0 0 8px;font-size:20px}
+  .muted{color:var(--muted);font-size:14px;margin-top:6px}
+  .big-arabic{font-size:36px;text-align:center;margin-top:24px;opacity:0.95;color:#efeef0}
+  .big-translate{font-size:15px;text-align:center;color:var(--muted);margin-top:6px}
+
+  /* nav bottom */
+  .bottom-nav{position:fixed;left:0;right:0;bottom:0;height:68px;background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.06));display:flex;align-items:center;justify-content:space-around;padding:8px 16px;border-top:1px solid rgba(255,255,255,0.03)}
+  .nav-item{display:flex;flex-direction:column;align-items:center;font-size:12px;color:var(--muted);text-decoration:none}
+  .nav-item.active{color:var(--accent)}
+  .nav-icon{font-size:22px;margin-bottom:4px}
+
+  /* challenge */
+  .controls button{margin-right:8px;padding:8px 12px;border-radius:8px;border:0;background:#fff;color:#111;cursor:pointer}
+  .previewBox{display:inline-block;padding:8px 12px;border-radius:8px;border:2px dashed rgba(255,255,255,0.06);color:var(--muted)}
+
+  /* footer credits / links */
+  footer{padding:18px 8px 120px;color:var(--muted);text-align:center;font-size:13px}
+
+  /* small screen tweaks */
+  @media(min-width:720px){
+    .thumb{width:120px;height:120px;flex:0 0 120px}
+    .thumb-row{gap:20px}
+  }
+
+  /* small fixes for the "links row" at bottom of page when content short */
+  .spacer{height:26px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Islamic._._dill</h1>
+</header>
+
+<main>
+  <!-- Instagram thumbnails (uses images stored in /images/) -->
+  <section id="instaSection">
+    <h2 class="section-title">Instagram Posts</h2>
+    <div class="thumb-row" id="thumbRow">
+      <!-- Thumbnails: these should point to images you uploaded to /images/ -->
+      <div class="thumb" data-img="images/c982a0919d0642a1485e891a7e335460.jpg" title="Post 1">
+        <img src="images/c982a0919d0642a1485e891a7e335460.jpg" alt="Post thumbnail">
+      </div>
+
+      <div class="thumb" data-img="images/f3dfb5de51bdd62514272210ac68ff86.jpg" title="Reel 1">
+        <img src="images/f3dfb5de51bdd62514272210ac68ff86.jpg" alt="Reel 1 thumbnail">
+      </div>
+
+      <div class="thumb" data-img="images/a0f67c7782bd7ac3077ef6dbe66222fa.jpg" title="Reel 2">
+        <img src="images/a0f67c7782bd7ac3077ef6dbe66222fa.jpg" alt="Reel 2 thumbnail">
+      </div>
+    </div>
+
+    <div style="display:flex;gap:20px;justify-content:center;margin-top:8px">
+      <a class="thumb-link" href="#" onclick="openImageOrIG(0);return false">Post 1</a>
+      <a class="thumb-link" href="#" onclick="openImageOrIG(1);return false">Reel 1</a>
+      <a class="thumb-link" href="#" onclick="openImageOrIG(2);return false">Reel 2</a>
+    </div>
+
+    <div class="note">Tap a thumbnail to open the full image (guaranteed). To open the Instagram post instead, provide the post URL and I'll swap behavior.</div>
+  </section>
+
+  <!-- Hadith -->
+  <section id="hadithSection">
+    <h2 class="section-title">Hadith of the Day</h2>
+    <div class="card" id="hadithOfDay">
+      Loading...
+    </div>
+
+    <h3 style="margin-top:8px">All Hadiths</h3>
+    <div id="hadithList"></div>
+    <div style="text-align:center;margin:18px 0"><button id="loadMoreHadiths">Load more</button></div>
+  </section>
+
+  <!-- Verses -->
+  <section id="verseSection">
+    <h2 class="section-title">Verse of the Day</h2>
+    <div class="card" id="verseOfDay">Loading...</div>
+
+    <h3 style="margin-top:8px">All Verses</h3>
+    <div id="verseList"></div>
+    <div style="text-align:center;margin:18px 0"><button id="loadMoreVerses">Load more</button></div>
+  </section>
+
+  <!-- big arabic quote to reduce blank space -->
+  <div class="big-arabic">وَوَجَدَكَ ضَالًّا فَهَدَى</div>
+  <div class="big-translate">“And He found you lost and guided you.” — Qur'an 93:7</div>
+
+  <div style="height:26px"></div>
+</main>
+
+<!-- bottom nav -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item active"><div class="nav-icon">🏠</div>Home</a>
+  <a href="hadiths.html" class="nav-item"><div class="nav-icon">📖</div>Hadith</a>
+  <a href="verses.html" class="nav-item"><div class="nav-icon">🕋</div>Verse</a>
+  <a href="challenge.html" class="nav-item"><div class="nav-icon">🎯</div>Challenge</a>
+  <a href="about.html" class="nav-item"><div class="nav-icon">ℹ️</div>About</a>
+</nav>
+
+<footer>
+  <div style="opacity:0.85">Made for daily reminders • <a href="https://www.instagram.com/Islamic._._dill" target="_blank">@Islamic._._dill</a></div>
+</footer>
+
+<!-- Inline JS: manages hadiths/verses/challenge/thumb open -->
+<script>
+/* -------------------------
+   Data arrays
+   (Add more hadiths / verses by appending objects)
+   ------------------------- */
+const hadiths = [
+  {text:"Actions are judged by intentions.", source:"Sahih al-Bukhari", ref:"Bukhari 1"},
+  {text:"The strong believer is better than the weak believer.", source:"Sahih Muslim", ref:"Muslim 2564"},
+  {text:"Cleanliness is half of faith.", source:"Sahih Muslim", ref:"Muslim 223"},
+  {text:"A smile is charity.", source:"Tirmidhi", ref:"Tirmidhi 1956"},
+  {text:"Pray as if it were your last prayer.", source:"Spiritual advice", ref:"—"},
+  {text:"None of you truly believes until he wishes for his brother what he wishes for himself.", source:"Bukhari & Muslim", ref:"Bukhari 13"},
+  {text:"The Prophet loved perfume and cleanliness.", source:"Sunan an-Nasa'i", ref:"Nasa'i 3"},
+  {text:"Do not waste water even if you perform ablution on the banks of an abundantly-flowing river.", source:"Ibn Majah", ref:"Ibn Majah 425"},
+  // add more here (you wanted 40 — you can copy/paste)
+];
+
+const verses = [
+  {arab:"فَاذْكُرُونِي أَذْكُرْكُمْ", en:"So remember Me; I will remember you.", ref:"2:152"},
+  {arab:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", en:"Indeed, with hardship comes ease.", ref:"94:6"},
+  {arab:"قُلْ يَا أَيُّهَا الْكَافِرُونَ", en:"Say, O disbelievers...", ref:"109:1"},
+  {arab:"وَوَجَدَكَ ضَالًّا فَهَدَى", en:"And He found you lost and guided you.", ref:"93:7"},
+  // add more here to reach 40 if you want
+];
+
+/* -------------------------
+   Render helpers
+   ------------------------- */
+function renderHadithOfDay(){
+  // Simple daily pick based on date (rotates)
+  const i = (new Date().getDate() + new Date().getMonth()) % hadiths.length;
+  const h = hadiths[i];
+  const el = document.getElementById('hadithOfDay');
+  el.innerHTML = `<h3>"${escapeHtml(h.text)}"</h3><div class="muted">Reference: ${escapeHtml(h.source)}${h.ref?(" ("+escapeHtml(h.ref)+")"):''}</div>`;
+}
+
+function renderHadithList(count=4){
+  const list = document.getElementById('hadithList');
+  list.innerHTML = '';
+  for(let i=0;i<Math.min(count, hadiths.length); i++){
+    const h = hadiths[i];
+    const node = document.createElement('div');
+    node.className = 'card';
+    node.innerHTML = `<div style="font-size:18px">${escapeHtml(h.text)}</div><div class="muted">${escapeHtml(h.source)}${h.ref?(" — "+escapeHtml(h.ref)):""}</div>`;
+    list.appendChild(node);
+  }
+}
+
+function renderVerseOfDay(){
+  const i = (new Date().getDate() + new Date().getMonth()) % verses.length;
+  const v = verses[i];
+  const el = document.getElementById('verseOfDay');
+  el.innerHTML = `<div style="font-size:18px">${escapeHtml(v.arab)} — ${escapeHtml(v.en)}</div><div class="muted">${escapeHtml(v.ref)}</div>`;
+}
+
+function renderVerses(count=3){
+  const list = document.getElementById('verseList'); list.innerHTML='';
+  for(let i=0;i<Math.min(count, verses.length); i++){
+    const v = verses[i];
+    const node = document.createElement('div'); node.className='card';
+    node.innerHTML = `<div style="font-size:16px">${escapeHtml(v.arab)} — ${escapeHtml(v.en)}</div><div class="muted">${escapeHtml(v.ref)}</div>`;
+    list.appendChild(node);
+  }
+}
+
+// escape for safe text injection
+function escapeHtml(s){ return (s+'').replace(/[&<>"]/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c])); }
+
+/* -------------------------
+   Thumbnails: open the image file by default
+   ------------------------- */
+function openImageOrIG(idx){
+  const thumbs = document.querySelectorAll('.thumb');
+  if(idx < 0 || idx >= thumbs.length) return;
+  const el = thumbs[idx];
+  const img = el.getAttribute('data-img'); // our local repo image
+  const ig = el.getAttribute('data-ig');   // optional instagram URL
+  if(img){
+    // open the raw image in a new tab (reliable)
+    window.open(img, '_blank');
+    return;
+  }
+  if(ig){
+    window.open(ig, '_blank'); return;
+  }
+  alert('Image not found — upload the JPG in the images/ folder and make sure filename is correct.');
+}
+
+// make thumbs clickable
+document.addEventListener('click', function(e){
+  const t = e.target.closest('.thumb');
+  if(!t) return;
+  const thumbs = Array.from(document.querySelectorAll('.thumb'));
+  const i = thumbs.indexOf(t);
+  if(i>=0) openImageOrIG(i);
+});
+
+/* -------------------------
+   Challenge logic: 5 previews
+   ------------------------- */
+const challenges = [
+  "Send a kind message to a family member.",
+  "Donate food to someone in need.",
+  "Compliment someone sincerely.",
+  "Avoid backbiting for the whole day.",
+  "Help clean a shared space."
+  // add more if you need; Core behavior only shows 1 preview and rotates up to 5 previews.
+];
+
+let challengePreviewIndex = 0;
+let completedChallenges = []; // persisted in localStorage
+
+function renderChallenge(){
+  const box = document.querySelector('#challengeBox');
+  if(!box) return;
+  box.textContent = challenges[challengePreviewIndex] || "No challenge available.";
+}
+
+function initChallengesUI(){
+  // create challenge area under a Challenge page if present, but on index we'll show a small preview
+  // create a small challenge preview card on home (we keep it simple)
+  const chSection = document.createElement('section');
+  chSection.style.marginTop='20px';
+  chSection.innerHTML = `<h2 class="section-title">Today's Challenge</h2>
+    <div class="card" id="todayChallenge">
+      <div id="challengeBox" style="font-size:16px">Loading...</div>
+      <div style="margin-top:10px" class="controls">
+        <button id="markDoneBtn">Mark Done</button>
+        <span class="previewBox" id="previewLabel">Preview ${challengePreviewIndex+1}</span>
+      </div>
+    </div>
+    <div id="challengeHistory"></div>`;
+  document.querySelector('main').appendChild(chSection);
+
+  // load persisted
+  const stored = localStorage.getItem('challengeHistory_v1');
+  if(stored) completedChallenges = JSON.parse(stored);
+
+  document.getElementById('markDoneBtn').addEventListener('click', ()=>{
+    const text = challenges[challengePreviewIndex];
+    const when = (new Date()).toLocaleString();
+    completedChallenges.unshift({text,when});
+    if(completedChallenges.length>365) completedChallenges.length=365; // cap
+    localStorage.setItem('challengeHistory_v1', JSON.stringify(completedChallenges));
+    renderChallengeHistory();
+    // advance preview
+    if(challengePreviewIndex < Math.min(challenges.length-1,4)) challengePreviewIndex++;
+    renderChallenge();
+    document.getElementById('previewLabel').textContent = `Preview ${Math.min(challengePreviewIndex+1,5)}`;
+  });
+
+  renderChallenge();
+  renderChallengeHistory();
+}
+
+function renderChallengeHistory(){
+  const h = document.getElementById('challengeHistory');
+  h.innerHTML = '<h3 style="margin-top:12px">History (Completed)</h3>';
+  if(completedChallenges.length===0){ h.innerHTML += '<div class="muted">No completed challenges yet.</div>'; return; }
+  completedChallenges.forEach(c=>{
+    const d = document.createElement('div'); d.className='card'; d.innerHTML = `<div>${escapeHtml(c.text)}</div><div class="muted">${escapeHtml(c.when)}</div>`;
+    h.appendChild(d);
+  });
+}
+
+/* -------------------------
+   Load more buttons handlers
+   ------------------------- */
+let hadithsShown = 4;
+let versesShown = 3;
+document.addEventListener('click', (e)=>{
+  if(e.target && e.target.id === 'loadMoreHadiths'){
+    hadithsShown += 4; renderHadithList(hadithsShown);
+  }
+  if(e.target && e.target.id === 'loadMoreVerses'){
+    versesShown += 3; renderVerses(versesShown);
+  }
+});
+
+/* -------------------------
+   Initialize page
+   ------------------------- */
+function initPage(){
+  renderHadithOfDay();
+  renderHadithList(hadithsShown);
+  renderVerseOfDay();
+  renderVerses(versesShown);
+
+  // initialize a small challenge preview area (if you want dedicated challenge page we can enhance)
+  initChallengesUI();
+}
+
+// small fallback image substitution if missing
+document.querySelectorAll('.thumb img').forEach(img=>{
+  img.addEventListener('error', ()=>{
+    img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="100%" height="100%" fill="#111"></rect><text x="50%" y="50%" font-family="Arial" dominant-baseline="middle" text-anchor="middle" fill="#bdb5c7" font-size="18">thumbnail</text></svg>');
+  });
+});
+
+initPage();
+</script>
+</body>
+    </html>
