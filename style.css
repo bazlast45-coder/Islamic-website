@@ -1,0 +1,126 @@
+:root {
+  --bg:#0f0f10;
+  --card:#111216;
+  --text:#f7f7f7;
+  --muted:#cfc6b8;
+  --accent:#c79a3b;
+  --app-width:420px;
+}
+
+/* RESET */
+* { box-sizing:border-box; }
+
+html,body {
+  margin:0;
+  height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+}
+
+/* FLORAL DECOR ALWAYS VISIBLE */
+#floral-decor {
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:1400px;
+  height:180px;
+  z-index:0;
+  pointer-events:none;
+  opacity:1;
+  mix-blend-mode:overlay;
+  filter:blur(0.5px);
+}
+
+/* LAYOUT */
+.app-shell {
+  position:relative;
+  max-width:var(--app-width);
+  margin:0 auto;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  z-index:1;
+}
+
+header {
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:sticky;
+  top:0;
+  background:transparent;
+  z-index:10;
+}
+
+header .title {
+  font-size:21px;
+  font-weight:700;
+}
+
+/* MAIN */
+.container {
+  padding:16px 14px 90px;
+}
+
+/* POSTS */
+.posts {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.posts img {
+  width:100%;
+  height:120px;
+  border-radius:14px;
+  object-fit:cover;
+}
+
+/* CARDS */
+.card {
+  background:rgba(255,255,255,0.03);
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.05);
+  margin-top:8px;
+}
+
+/* TEXT */
+h2 { font-size:17px; margin-bottom:6px; }
+.trans { line-height:1.5; font-size:15px; }
+.meta { color:var(--muted); font-size:13px; margin-top:6px; }
+
+/* NAV */
+.bottom-nav {
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:0;
+  width:100%;
+  max-width:var(--app-width);
+  height:65px;
+  background:#0c0c0c;
+  border-top:1px solid rgba(255,255,255,0.06);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.bottom-nav a {
+  text-decoration:none;
+  color:var(--muted);
+  font-size:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.bottom-nav a.active {
+  color:var(--accent);
+  font-weight:600;
+}
+
+.icon { font-size:22px; }
