@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>365-Day Challenge — Islamic._._dill</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header><div class="title">365-Day Challenge</div></header>
+    <main class="container">
+      <section>
+        <h2>Today's Challenge</h2>
+        <div class="card">
+          <div id="challenge-text">Loading...</div>
+          <div style="margin-top:10px;">
+            <button id="mark-done" class="btn">Mark Done</button>
+            <button id="get-another" class="btn ghost">Get Another</button>
+          </div>
+          <div id="done-message" class="meta small" style="margin-top:10px;"></div>
+        </div>
+      </section>
+
+      <section style="margin-top:18px;">
+        <h2>History (Completed)</h2>
+        <div id="history-list"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="icon">🏠</span><span>Home</span></a>
+      <a href="hadiths.html"><span class="icon">📖</span><span>Hadith</span></a>
+      <a href="verses.html"><span class="icon">🕋</span><span>Verse</span></a>
+      <a href="challenge.html" class="active"><span class="icon">🎯</span><span>Challenge</span></a>
+      <a href="about.html"><span class="icon">ℹ️</span><span>About</span></a>
+    </nav>
+  </div>
+
+<script>
+(function(){
+  // List of challenges (you can expand to 365 entries)
+  const CHALLENGES = [
+    "Say 'SubhanAllah' 33 times after prayer.",
+    "Give sincere help to someone without being asked.",
+    "Read 1 page of Qur'an and reflect on meaning.",
+    "Send a kind message to a family member.",
+    "Make dua for someone who hurt you.",
+    "Fast one extra (non-obligatory) day.",
+    "Give a small charity to someone in need.",
+    "Correct your intention for one action today.",
+    "Make wudu and pray two nafl with focus.",
+    "Spend 10 minutes learning a short hadith.",
+    "Help a neighbor with a small task.",
+    "Thank someone genuinely and explain why.",
+    "Cook a simple meal and share with a neighbor.",
+    "Avoid backbiting for the whole day.",
+    "Memorize one short dua and recite it.",
+    "Visit an elder and listen to them.",
+    "Give someone a sincere compliment.",
+    "Recite Surah Al-Fatiha slowly and reflect.",
+    "Donate clothes you don't use.",
+    "Spend 10 minutes in mindful dhikr."
+  ];
+
+  function todayKey(){ const d=new Date(); return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+  function choose(array){ return array[Math.floor(Math.random()*array.length)]; }
+
+  function loadDailyChallenge(){
+    const key = todayKey();
+    let storedKey = localStorage.getItem('challenge_day_key');
+    if(storedKey !== key){
+      // new day -> pick a fresh one
+      const pick = choose(CHALLENGES);
+      localStorage.setItem('challenge_day_key', key);
+      localStorage.setItem('challenge_today', JSON.stringify({text: pick, ts: Date.now()}));
+      // do not modify history
+    }
+    const cur = JSON.parse(localStorage.getItem('challenge_today') || '{}');
+    const el = document.getElementById('challenge-text');
+    if(cur && cur.text){
+      el.textContent = cur.text;
+      document.getElementById('done-message').textContent = '';
+    } else {
+      el.textContent = 'No challenge available.';
+    }
+    renderHistory();
+  }
+
+  function renderHistory(){
+    const hist = JSON.parse(localStorage.getItem('challenge_history') || '[]');
+    const list = document.getElementById('history-list');
+    list.innerHTML = '';
+    // show last 5 completed
+    const recent = hist.slice(-5).reverse();
+    if(recent.length === 0){
+      list.innerHTML = '<div class="meta small">No completed challenges yet.</div>';
+      return;
+    }
+    recent.forEach(item=>{
+      const d = new Date(item.ts);
+      const el = document.createElement('div');
+      el.className = 'card';
+      el.style.marginBottom = '10px';
+      el.innerHTML = `<div style="font-size:15px">${item.text}</div><div class="meta small">${d.toLocaleString()}</div>`;
+      list.appendChild(el);
+    });
+  }
+
+  function markDone(){
+    const cur = JSON.parse(localStorage.getItem('challenge_today') || '{}');
+    if(!cur || !cur.text) return;
+    const hist = JSON.parse(localStorage.getItem('challenge_history') || '[]');
+    // Add to history
+    hist.push({text: cur.text, ts: Date.now()});
+    // Prevent duplicate daily marking: optionally you can limit marking same challenge again — for now we log every mark
+    localStorage.setItem('challenge_history', JSON.stringify(hist));
+    // Show mashallah message
+    const msg = document.getElementById('done-message');
+    msg.innerHTML = 'MashaAllah — Well done. You will be rewarded for this in the Akhira. 🤲';
+    renderHistory();
+  }
+
+  function getAnother(){
+    // Replace today challenge only by explicit request
+    const newPick = choose(CHALLENGES);
+    localStorage.setItem('challenge_today', JSON.stringify({text: newPick, ts: Date.now()}));
+    document.getElementById('challenge-text').textContent = newPick;
+    document.getElementById('done-message').textContent = '';
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    loadDailyChallenge();
+    document.getElementById('mark-done').addEventListener('click', markDone);
+    document.getElementById('get-another').addEventListener('click', getAnother);
+  });
+})();
+</script>
+
+</body>
+  </html>
