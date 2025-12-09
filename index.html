@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A Journey Toward Allah</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Daily Qur'an verse, Hadith, Dhikr and a 365-day Islamic challenge." />
+</head>
+<body>
+  <div id="loader" class="loader-wrap" aria-hidden="false">
+    <div class="loader"></div>
+  </div>
+
+  <header class="topbar" role="banner">
+    <div class="brand">
+      <div class="logo">🌙</div>
+      <div>
+        <h1>A Journey Toward Allah</h1>
+        <p class="tag">Remembrance • Knowledge • Good Deeds</p>
+      </div>
+    </div>
+
+    <nav class="nav topnav" aria-label="Main Navigation">
+      <a href="index.html">Home</a>
+      <a href="hadith.html">Hadith</a>
+      <a href="verse.html">Verse</a>
+      <a href="dhikr.html">Dhikr</a>
+      <a href="challenge.html">365 Challenge</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="page" role="main">
+    <section class="card main-card" id="mainCard" aria-live="polite">
+      <div class="top-row">
+        <div class="date-block">
+          <div id="greg-date" class="muted small"></div>
+          <div id="hijri-date" class="muted small"></div>
+        </div>
+      </div>
+
+      <div class="centered">
+
+        <!-- HADITH -->
+        <article class="block" id="hadith-block">
+          <div class="arabic" id="hadith-ar">—</div>
+          <div class="translation" id="hadith-trans">Loading hadith…</div>
+          <div class="ref muted" id="hadith-ref"></div>
+        </article>
+
+        <!-- VERSE -->
+        <article class="block" id="verse-block">
+          <div class="arabic" id="verse-ar">—</div>
+          <div class="translation" id="verse-trans">Loading verse…</div>
+          <div class="ref muted" id="verse-ref"></div>
+        </article>
+
+        <!-- CHALLENGE -->
+        <article class="block challenge" id="challenge-block">
+          <div class="challenge-day" id="challenge-day">—</div>
+          <div class="challenge-text" id="challenge-text">Press the button to get today's challenge.</div>
+          <div class="muted small" id="challenge-evidence"></div>
+
+          <div class="controls">
+            <button id="generate-btn" class="btn">Get Today's Challenge</button>
+            <button id="mark-done" class="btn secondary">Mark Done ✓</button>
+          </div>
+
+          <div class="progress small muted">Completed today: <span id="done-status">No</span></div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav botnav" aria-label="Footer Navigation">
+      <a href="index.html">Home</a>
+      <a href="hadith.html">Hadith</a>
+      <a href="verse.html">Verse</a>
+      <a href="challenge.html">365 Challenge</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <div class="footer-note">Follow on Instagram: <a id="Islamic._._dill" href="https://instagram.com/Islamic._._dill" target="_blank" rel="noopener">@Islamic._._dill</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+      </html>
