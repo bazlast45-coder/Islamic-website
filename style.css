@@ -12,32 +12,33 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;font-family:Inter, system-ui, Arial, sans-serif}
 
-/* enhance background gradient + visible floral line */
+/* stronger background gradient - subtle gold glow near the top */
 body::before{
   content: "";
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.6) 50%),
-    radial-gradient(1000px 300px at 50% 0%, rgba(199,154,59,0.08), transparent 20%);
+    radial-gradient(1200px 420px at 50% 0%, rgba(199,154,59,0.12), transparent 18%),
+    linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.72) 60%);
   pointer-events:none;
   z-index:0;
 }
 
-/* Make the decorative floral path more visible */
+/* make the decorative floral path more visible: bigger, higher opacity and slightly blurred for softness */
 body::after{
   content:"";
   position:fixed;
   left:0;
   right:0;
-  top:0;
-  height:160px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="160"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="%23c79a3b" stop-opacity="0.12"/><stop offset="1" stop-color="%23c79a3b" stop-opacity="0.06"/></linearGradient></defs><g fill="none" stroke="url(%23g)" stroke-width="1.6" opacity="0.95"><path d="M0 120 C140 10, 320 40, 500 70 C680 100, 860 40, 1200 120"/></g></svg>');
+  top:-10px;            /* pull slightly up so curve is more visible */
+  height:220px;         /* increase height so it's more prominent */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="220"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="%23c79a3b" stop-opacity="0.18"/><stop offset="1" stop-color="%23c79a3b" stop-opacity="0.08"/></linearGradient></defs><g fill="none" stroke="url(%23g)" stroke-width="2.4" opacity="1"><path d="M0 160 C200 20, 420 60, 700 100 C980 140, 1180 60, 1400 160"/></g></svg>');
   background-repeat:no-repeat;
   background-position:center top;
   background-size:cover;
   pointer-events:none;
   z-index:0;
+  filter: blur(0.6px) saturate(1.05);
   mix-blend-mode:overlay;
 }
 
@@ -45,16 +46,16 @@ body::after{
 .app-shell{position:relative;max-width:var(--app-width);margin:0 auto;min-height:100vh;display:flex;flex-direction:column;z-index:1}
 
 /* header */
-header{height:54px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.04);background:transparent;position:sticky;top:0;z-index:10}
-header .title{font-weight:700;font-size:18px;color:var(--text);letter-spacing:0.2px}
+header{height:56px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.04);background:transparent;position:sticky;top:0;z-index:10}
+header .title{font-weight:700;font-size:20px;color:var(--text);letter-spacing:0.2px}
 
-/* main container */
-.container{padding:14px 14px 140px;flex:1}
+/* main container - REDUCED bottom padding to avoid big blank space */
+.container{padding:14px 14px 90px;flex:1} /* was 140px -> now 90px */
 
 /* posts */
-.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
-.posts a{display:block;border-radius:12px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03)}
-.posts img{width:100%;height:100%;object-fit:cover;display:block}
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.posts a{display:block;border-radius:14px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 24px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.03)}
+.posts img{width:100%;height:110px;object-fit:cover;display:block}
 
 /* sections */
 section{margin:14px 0}
@@ -62,20 +63,19 @@ h2{font-size:16px;margin:0 0 8px 0;font-weight:700;color:var(--text)}
 .card{
   background: rgba(255,255,255,0.02);
   border-radius:14px;
-  padding:12px;
+  padding:14px;
   border:1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.5);
   color:var(--text);
 }
 
 /* text */
-.trans{font-size:15px;line-height:1.38;color:var(--text)}
-.arabic{font-family:"Noto Naskh Arabic", serif;font-size:18px;color:#fff}
+.trans{font-size:16px;line-height:1.45;color:var(--text)}
+.arabic{font-family:"Noto Naskh Arabic", serif;font-size:20px;color:#fff}
 .meta{font-size:12px;color:var(--muted);margin-top:8px}
 .small{font-size:13px;color:var(--muted)}
 
-/* lists & cards */
-.grid-list{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px}
+/* list cards */
 .list-card{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));display:flex;flex-direction:column}
 
 /* buttons */
@@ -89,16 +89,20 @@ h2{font-size:16px;margin:0 0 8px 0;font-weight:700;color:var(--text)}
 
 /* bottom nav */
 .bottom-nav{
-  position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:var(--app-width);height:64px;background:rgba(12,12,12,0.98);border-top:1px solid rgba(255,255,255,0.03);
+  position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:var(--app-width);height:64px;background:linear-gradient(180deg, rgba(12,12,12,0.96), rgba(10,10,10,0.98));border-top:1px solid rgba(255,255,255,0.03);
   display:flex;justify-content:space-around;align-items:center;z-index:20;padding-bottom:env(safe-area-inset-bottom);
 }
-.bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:var(--muted);font-size:11px;width:56px}
+.bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:var(--muted);font-size:11px;width:58px}
 .bottom-nav a .icon{font-size:20px}
 .bottom-nav a.active{color:var(--accent);font-weight:700}
 
-/* responsive */
+/* small screens: tighten spacing */
 @media(max-width:420px){
   :root{--app-width:100vw}
-  .container{padding:12px 10px 140px}
-  .posts{gap:6px}
-           }
+  .container{padding:12px 12px 100px} /* keep some space for nav */
+  .posts img{height:120px}
+  header .title{font-size:18px}
+}
+
+/* other niceties */
+img{max-width:100%;height:auto;display:block}
